@@ -353,4 +353,141 @@
                     <path d="M12 8c-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4"/>
                 </svg>
             </div>
-            <nav class="nav
+            <nav class="nav-icons">
+                <a onclick="switchPage('home')" class="active" title="Início"><i data-lucide="home"></i></a>
+                <a onclick="switchPage('lore')" title="A Biblioteca"><i data-lucide="book-open"></i></a>
+                <a href="#contato" onclick="switchPage('home')" title="Contato"><i data-lucide="mail"></i></a>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            
+            <header class="topbar">
+                <div class="nav-links">
+                    <a onclick="switchPage('home')" class="active">Início</a>
+                    <a onclick="switchPage('lore')">A Biblioteca</a>
+                    <a href="#contato" onclick="switchPage('home')">Contato</a>
+                </div>
+                <div class="user-actions">
+                    <button class="btn-primary" onclick="switchPage('lore')">
+                        <i data-lucide="sparkles" size="16"></i> Explorar Nexora
+                    </button>
+                    <div class="user-profile">
+                        <div class="avatar">V</div>
+                    </div>
+                    <button class="menu-toggle" onclick="toggleMenu()">
+                        <i data-lucide="menu" size="24"></i>
+                    </button>
+                </div>
+            </header>
+
+            <!-- TELA 1: HOME -->
+            <div id="page-home" class="page-section active">
+                <section class="hero-section">
+                    <div class="hero-content">
+                        <span class="tag"><i data-lucide="flame" size="14"></i> Novo Mundo Descoberto</span>
+                        <h1 class="hero-title">Bem-vindo ao <br>Universo Nexora</h1>
+                        <p class="hero-subtitle">Explore as crônicas, os reinos esquecidos e os heróis que moldam o destino de múltiplas realidades. Uma jornada narrativa imersiva espera por você.</p>
+                        <div class="hero-buttons">
+                            <button class="btn-primary" onclick="switchPage('lore')">
+                                <i data-lucide="compass" size="18"></i> Iniciar Jornada
+                            </button>
+                            <button class="btn-outline" onclick="openModal('modal-construcao')">
+                                <i data-lucide="play-circle" size="18"></i> Trailer do Projeto
+                            </button>
+                        </div>
+                    </div>
+                </section>
+
+                <div class="section-header">
+                    <h2 class="section-title">Explore os Setores</h2>
+                    <button class="btn-text" onclick="switchPage('lore')">Ver todos</button>
+                </div>
+                
+                <div class="grid-cards">
+                    <div class="card" style="border-color: rgba(212, 175, 55, 0.3);" onclick="openModal('modal-mare')">
+                        <div class="card-icon"><i data-lucide="droplets"></i></div>
+                        <h3>A Maré</h3>
+                        <p>A personificação da água nos infinitos universos.</p>
+                    </div>
+                    <div class="card" onclick="openModal('modal-construcao')">
+                        <div class="card-icon"><i data-lucide="mountain"></i></div>
+                        <h3>Reino de Aethel</h3>
+                        <p>Montanhas flutuantes e magia antiga. O berço dos primeiros guardiões.</p>
+                    </div>
+                    <div class="card" onclick="openModal('modal-construcao')">
+                        <div class="card-icon"><i data-lucide="zap"></i></div>
+                        <h3>Metrópole Neon</h3>
+                        <p>Uma cidade futurista movida a energia instável e segredos corporativos.</p>
+                    </div>
+                </div>
+
+                <section class="about-section">
+                    <div class="about-text">
+                        <h2>O Que é Nexora?</h2>
+                        <p>Nexora não é apenas um mundo; é um multiverso interconectado. Nascido da imaginação e moldado por conflitos épicos, cada canto deste universo guarda uma história esperando para ser contada.</p>
+                        <p>Atualmente, estamos construindo os pilares desta realidade. Em breve, você poderá acessar os livros, as artes conceituais e as crônicas dos personagens que habitam estes reinos.</p>
+                        <br>
+                        <button class="btn-outline" onclick="switchPage('lore')">
+                            <i data-lucide="book" size="18"></i> Conhecer a Lore
+                        </button>
+                    </div>
+                    <div class="about-visual" onclick="openModal('modal-mare')"></div>
+                </section>
+            </div>
+
+            <!-- TELA 2: BIBLIOTECA -->
+            <div id="page-lore" class="page-section">
+                <div class="page-header">
+                    <button class="btn-back" onclick="switchPage('home')"><i data-lucide="arrow-left" size="24"></i></button>
+                    <h2 class="page-title">A Biblioteca</h2>
+                </div>
+                <div class="lore-grid">
+                    <div class="lore-square" onclick="switchPage('characters')">
+                        <div class="lore-icon"><i data-lucide="users" size="40"></i></div>
+                        <h3>Personagens</h3>
+                        <p>Conheça os heróis, vilões e divindades que habitam os infinitos universos.</p>
+                    </div>
+                    <div class="lore-square" onclick="switchPage('books')">
+                        <div class="lore-icon"><i data-lucide="book" size="40"></i></div>
+                        <h3>Livros e Contos</h3>
+                        <p>Acesse as crônicas, prólogos e histórias oficiais do universo Nexora.</p>
+                    </div>
+                    <div class="lore-square" onclick="openModal('modal-construcao')">
+                        <div class="lore-icon"><i data-lucide="globe" size="40"></i></div>
+                        <h3>Atlas de Mundos</h3>
+                        <p>Explore os reinos, planetas e realidades interconectadas.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TELA 3: PERSONAGENS -->
+            <div id="page-characters" class="page-section">
+                <div class="page-header">
+                    <button class="btn-back" onclick="switchPage('lore')"><i data-lucide="arrow-left" size="24"></i></button>
+                    <h2 class="page-title">Personagens</h2>
+                </div>
+                <div class="character-grid">
+                    <div class="char-card" onclick="openModal('modal-mare')">
+                        <div class="char-img"></div>
+                        <h3>A Maré</h3>
+                        <p>Personificação da Água</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TELA 4: LIVROS -->
+            <div id="page-books" class="page-section">
+                <div class="page-header">
+                    <button class="btn-back" onclick="switchPage('lore')"><i data-lucide="arrow-left" size="24"></i></button>
+                    <h2 class="page-title">Livros e Contos</h2>
+                </div>
+                <div class="books-grid">
+                    <div class="book-card" onclick="openModal('modal-construcao')">
+                        <i data-lucide="file-text" size="32"></i>
+                        <h3>O Despertar</h3>
+                        <span>Prólogo - Em breve</span>
+                    </div>
+                    <div class="book-card" onclick="openModal('modal-construcao')">
+                        <i data-lucide="file-text" size="32"></i>
+                        <h3>Lágrimas de Aet
