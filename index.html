@@ -75,8 +75,8 @@
         .page-title { font-family: 'Cinzel', serif; font-size: 2.5rem; color: var(--gold-accent); }
         
         .lore-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; margin-top: 20px; }
-        .lore-square { background: rgba(30, 30, 35, 0.6); backdrop-filter: blur(20px); border: 1px solid var(--surface-border); border-radius: 24px; padding: 50px 30px; text-align: center; cursor: pointer; transition: 0.4s; display: flex; flex-direction: column; align-items: center; position: relative; overflow: hidden; box-shadow: inset 0 0 20px rgba(255,255,255,0.02); }
-        .lore-square:hover { transform: translateY(-10px); border-color: rgba(212, 175, 55, 0.5); background: rgba(40, 40, 48, 0.7); }
+        .lore-square { background: rgba(30, 30, 35, 0.95); backdrop-filter: blur(20px); border: 1px solid var(--surface-border); border-radius: 24px; padding: 50px 30px; text-align: center; cursor: pointer; transition: 0.4s; display: flex; flex-direction: column; align-items: center; position: relative; overflow: hidden; box-shadow: inset 0 0 20px rgba(255,255,255,0.02); }
+        .lore-square:hover { transform: translateY(-10px); border-color: rgba(212, 175, 55, 0.5); background: rgba(40, 40, 48, 0.95); }
         
         .bg-image { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-size: cover; background-position: center; z-index: 0; pointer-events: none; }
         
@@ -88,6 +88,16 @@
         .char-card { background: var(--surface-color); border: 1px solid var(--surface-border); border-radius: 20px; overflow: hidden; cursor: pointer; text-align: center; padding-bottom: 20px; }
         .char-img { height: 300px; background: #1a1a24 url('mare.jpg') center top/cover; border-bottom: 1px solid var(--surface-border); }
         .char-card h3 { margin-top: 15px; font-family: 'Cinzel', serif; color: var(--gold-accent); font-size: 1.3rem; }
+        
+        .creator-layout { display: grid; grid-template-columns: 1fr 2fr; gap: 40px; margin-top: 20px; }
+        .creator-photo { width: 100%; height: 400px; border-radius: 24px; background: #1a1a24 url('criador.jpg') center top/cover no-repeat; border: 2px solid var(--gold-accent); box-shadow: 0 0 30px var(--gold-glow); }
+        .creator-info { display: flex; flex-direction: column; gap: 20px; }
+        .info-block { background: var(--surface-color); border: 1px solid var(--surface-border); border-radius: 20px; padding: 30px; }
+        .info-block h3 { font-family: 'Cinzel', serif; color: var(--gold-accent); font-size: 1.4rem; margin-bottom: 15px; display: flex; align-items: center; gap: 10px; }
+        .info-block p { color: var(--text-secondary); }
+        .contact-links { display: flex; gap: 15px; flex-wrap: wrap; margin-top: 10px; }
+        .contact-links a { display: flex; align-items: center; gap: 8px; background: rgba(255,255,255,0.05); padding: 12px 20px; border-radius: 12px; color: var(--text-primary); text-decoration: none; transition: 0.3s; border: 1px solid var(--surface-border); }
+        .contact-links a:hover { background: var(--gold-accent); color: #000; }
         
         .modal-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(8px); z-index: 1000; display: flex; justify-content: center; align-items: center; opacity: 0; pointer-events: none; transition: 0.3s ease; }
         .modal-overlay.active { opacity: 1; pointer-events: auto; }
@@ -108,6 +118,7 @@
             .sidebar { display: none; } .nav-links { display: none; } .menu-toggle { display: block; }
             .hero-title { font-size: 2rem; } .hero-buttons { flex-direction: column; }
             .about-section { grid-template-columns: 1fr; } .about-visual { height: 300px; }
+            .creator-layout { grid-template-columns: 1fr; } .creator-photo { height: 350px; }
             footer { flex-direction: column; }
         }
     </style>
@@ -121,6 +132,7 @@
         <a onclick="toggleMenu(); switchPage('home')"><i data-lucide="home" size="18"></i> Início</a>
         <a onclick="toggleMenu(); switchPage('history')"><i data-lucide="book" size="18"></i> Jornada</a>
         <a onclick="toggleMenu(); switchPage('lore')"><i data-lucide="globe" size="18"></i> A Lore</a>
+        <a onclick="toggleMenu(); switchPage('creator')"><i data-lucide="user" size="18"></i> O Criador</a>
     </div>
 
     <div class="app-container">
@@ -132,6 +144,7 @@
                 <a onclick="switchPage('home')" class="active"><i data-lucide="home"></i></a>
                 <a onclick="switchPage('history')"><i data-lucide="book"></i></a>
                 <a onclick="switchPage('lore')"><i data-lucide="globe"></i></a>
+                <a onclick="switchPage('creator')"><i data-lucide="user"></i></a>
             </nav>
         </aside>
 
@@ -141,6 +154,7 @@
                     <a onclick="switchPage('home')" class="active">Início</a>
                     <a onclick="switchPage('history')">Iniciar Jornada</a>
                     <a onclick="switchPage('lore')">Explorar a Lore</a>
+                    <a onclick="switchPage('creator')">O Criador</a>
                 </div>
                 <div class="user-actions">
                     <button class="menu-toggle" onclick="toggleMenu()"><i data-lucide="menu" size="24"></i></button>
@@ -171,16 +185,8 @@
                 </section>
                 
                 <footer>
-                    <div class="footer-col" style="max-width: 300px;">
-                        <div class="logo-icon" style="margin-bottom: 15px; width: 40px; height: 40px;">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/><path d="M12 6c-3.31 0-6 2.69-6 6s2.69 6 6 6 6-2.69 6-6"/></svg>
-                        </div>
-                        <p>O portal oficial para todos os mundos e histórias do universo Nexora.</p>
-                    </div>
-                    <div class="footer-col">
-                        <h4>Contato com o Criador</h4>
-                        <a href="mailto:viryanxy@gmail.com"><i data-lucide="mail" size="16"></i> viryanxy@gmail.com</a>
-                        <a href="https://discord.com/users/viryanxy" target="_blank"><i data-lucide="message-circle" size="16"></i> Discord: viryanxy</a>
+                    <div class="footer-col" style="max-width: 400px;">
+                        <p>O portal oficial para todos os mundos e histórias do universo Nexora. Criado com paixão por um autor independente.</p>
                     </div>
                     <div class="copyright">
                         &copy; 2024 Universo Nexora. Todos os direitos reservados.<br>
@@ -188,7 +194,8 @@
                     </div>
                 </footer>
             </div>
-                        <div id="page-history" class="page-section">
+
+            <div id="page-history" class="page-section">
                 <div class="page-header">
                     <button class="btn-back" onclick="switchPage('home')"><i data-lucide="arrow-left" size="24"></i></button>
                     <h2 class="page-title">Iniciar Jornada</h2>
@@ -207,8 +214,7 @@
                     </div>
                 </div>
             </div>
-
-            <div id="page-lore" class="page-section">
+                        <div id="page-lore" class="page-section">
                 <div class="page-header">
                     <button class="btn-back" onclick="switchPage('home')"><i data-lucide="arrow-left" size="24"></i></button>
                     <h2 class="page-title">Explorar a Lore</h2>
@@ -243,6 +249,40 @@
                     <div class="char-card" onclick="openModal('modal-mare')">
                         <div class="char-img"></div>
                         <h3>A Maré</h3>
+                    </div>
+                </div>
+            </div>
+
+            <div id="page-creator" class="page-section">
+                <div class="page-header">
+                    <button class="btn-back" onclick="switchPage('home')"><i data-lucide="arrow-left" size="24"></i></button>
+                    <h2 class="page-title">O Criador</h2>
+                </div>
+                <div class="creator-layout">
+                    <div class="creator-photo"></div>
+                    <div class="creator-info">
+                        <div class="info-block">
+                            <h3><i data-lucide="user"></i> Informações</h3>
+                            <p style="margin-bottom: 5px;"><strong>Nome:</strong> Victor Ryan Severino de Morais</p>
+                            <p style="margin-bottom: 5px;"><strong>Idade:</strong> 19 anos</p>
+                            <p><strong>Função:</strong> Autor e Criador do Universo Nexora</p>
+                        </div>
+                        
+                        <div class="info-block">
+                            <h3><i data-lucide="book-open"></i> Minha História</h3>
+                            <p style="font-style: italic; color: #d4af37; line-height: 1.6;">
+                                "Olá, sou Victor, criador de Nexora. Tenho 19 anos e, após múltiplos acontecimentos em minha vida — tentativas, perdas e desilusões —, decidi usar a escrita e a criatividade como o meu refúgio. Nexora é um reflexo direto da minha mente. Eu coloco um pedaço de mim em cada personagem, em cada mundo. Tudo isso nasceu do amor. Aproveitem a jornada."
+                            </p>
+                        </div>
+                        
+                        <div class="info-block">
+                            <h3><i data-lucide="mail"></i> Contato</h3>
+                            <p>Quer conversar sobre o universo, mandar teorias ou fazer uma parceria? Me chama!</p>
+                            <div class="contact-links">
+                                <a href="mailto:viryanxy@gmail.com"><i data-lucide="mail" size="18"></i> E-mail</a>
+                                <a href="https://discord.com/users/viryanxy" target="_blank"><i data-lucide="message-circle" size="18"></i> Discord</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
