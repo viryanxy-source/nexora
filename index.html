@@ -30,6 +30,7 @@
             padding: 0;
             box-sizing: border-box;
             font-family: 'Inter', sans-serif;
+            scroll-behavior: smooth;
         }
 
         body {
@@ -51,6 +52,7 @@
             z-index: -1;
             overflow: hidden;
             opacity: 0.4;
+            pointer-events: none;
         }
 
         .blob {
@@ -60,23 +62,8 @@
             animation: float 20s infinite alternate ease-in-out;
         }
 
-        .blob-1 {
-            background: #2a2a35;
-            width: 400px;
-            height: 400px;
-            top: -10%;
-            left: -10%;
-        }
-
-        .blob-2 {
-            background: #d4af37;
-            width: 300px;
-            height: 300px;
-            bottom: 10%;
-            right: -5%;
-            opacity: 0.15;
-            animation-delay: -5s;
-        }
+        .blob-1 { background: #2a2a35; width: 400px; height: 400px; top: -10%; left: -10%; }
+        .blob-2 { background: #d4af37; width: 300px; height: 300px; bottom: 10%; right: -5%; opacity: 0.15; animation-delay: -5s; }
 
         @keyframes float {
             0% { transform: translate(0, 0) scale(1); }
@@ -93,7 +80,7 @@
             gap: 20px;
         }
 
-        /* Sidebar (Estilo do menu da esquerda da foto) */
+        /* Sidebar */
         .sidebar {
             width: 80px;
             background: var(--surface-color);
@@ -109,6 +96,7 @@
             position: sticky;
             top: 20px;
             height: calc(100vh - 40px);
+            z-index: 10;
         }
 
         .logo-icon {
@@ -151,9 +139,10 @@
             display: flex;
             flex-direction: column;
             gap: 20px;
+            min-width: 0;
         }
 
-        /* Topbar (Header) */
+        /* Topbar */
         .topbar {
             display: flex;
             justify-content: space-between;
@@ -164,6 +153,8 @@
             border: 1px solid var(--surface-border);
             padding: 15px 30px;
             border-radius: 20px;
+            position: relative;
+            z-index: 20;
         }
 
         .nav-links {
@@ -179,11 +170,7 @@
             transition: 0.3s;
         }
 
-        .nav-links a:hover {
-            color: var(--text-primary);
-        }
-
-        .nav-links a.active {
+        .nav-links a:hover, .nav-links a.active {
             color: var(--text-primary);
             font-weight: 600;
         }
@@ -236,10 +223,71 @@
             font-weight: bold;
         }
 
-        /* Hero Section (Destaque Principal) */
+        /* Menu Mobile */
+        .menu-toggle {
+            display: none;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid var(--surface-border);
+            color: var(--text-primary);
+            padding: 8px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .menu-toggle:hover { background: rgba(255,255,255,0.1); }
+
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 250px;
+            height: 100vh;
+            background: rgba(15, 15, 20, 0.98);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-left: 1px solid var(--surface-border);
+            z-index: 100;
+            display: flex;
+            flex-direction: column;
+            padding: 40px 20px;
+            transition: right 0.4s ease;
+            box-shadow: -10px 0 30px rgba(0,0,0,0.5);
+        }
+
+        .mobile-menu.active { right: 0; }
+
+        .mobile-menu .close-btn {
+            align-self: flex-end;
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            cursor: pointer;
+            margin-bottom: 30px;
+        }
+
+        .mobile-menu a {
+            color: var(--text-primary);
+            text-decoration: none;
+            font-size: 1.1rem;
+            padding: 15px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .mobile-menu a:hover {
+            color: var(--gold-accent);
+            padding-left: 10px;
+        }
+
+        /* Hero Section */
         .hero-section {
             background: linear-gradient(to right, rgba(10, 10, 12, 0.9) 0%, rgba(10, 10, 12, 0.2) 100%), 
                         url('https://images.unsplash.com/photo-1462331940025-496dfbfc7564?q=80&w=2000&auto=format&fit=crop') center/cover no-repeat;
+            background-color: #1a1a24;
             border-radius: 28px;
             padding: 60px 40px;
             min-height: 400px;
@@ -251,10 +299,7 @@
             border: 1px solid var(--surface-border);
         }
 
-        .hero-content {
-            max-width: 600px;
-            z-index: 2;
-        }
+        .hero-content { max-width: 600px; z-index: 2; }
 
         .tag {
             display: inline-flex;
@@ -287,10 +332,7 @@
             text-shadow: 0 2px 10px rgba(0,0,0,0.8);
         }
 
-        .hero-buttons {
-            display: flex;
-            gap: 15px;
-        }
+        .hero-buttons { display: flex; gap: 15px; }
 
         .btn-outline {
             background: rgba(255, 255, 255, 0.1);
@@ -304,7 +346,9 @@
             transition: 0.3s;
             display: flex;
             align-items: center;
+            justify-content: center;
             gap: 8px;
+            cursor: pointer;
         }
 
         .btn-outline:hover {
@@ -312,7 +356,7 @@
             border-color: var(--text-primary);
         }
 
-        /* Seções de Grid (Como os cards da imagem) */
+        /* Seções de Grid */
         .section-header {
             display: flex;
             justify-content: space-between;
@@ -321,10 +365,7 @@
             margin-top: 20px;
         }
 
-        .section-title {
-            font-size: 1.5rem;
-            font-weight: 600;
-        }
+        .section-title { font-size: 1.5rem; font-weight: 600; }
 
         .btn-text {
             color: var(--text-secondary);
@@ -336,10 +377,7 @@
             transition: 0.3s;
         }
 
-        .btn-text:hover {
-            color: var(--text-primary);
-            background: rgba(255,255,255,0.1);
-        }
+        .btn-text:hover { color: var(--text-primary); background: rgba(255,255,255,0.1); }
 
         .grid-cards {
             display: grid;
@@ -350,7 +388,6 @@
         .card {
             background: var(--surface-color);
             backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
             border: 1px solid var(--surface-border);
             border-radius: 20px;
             padding: 20px;
@@ -378,16 +415,8 @@
             color: var(--gold-accent);
         }
 
-        .card h3 {
-            font-size: 1.1rem;
-            margin-bottom: 10px;
-        }
-
-        .card p {
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-            line-height: 1.4;
-        }
+        .card h3 { font-size: 1.1rem; margin-bottom: 10px; }
+        .card p { color: var(--text-secondary); font-size: 0.9rem; line-height: 1.4; }
 
         /* Sobre Nós */
         .about-section {
@@ -409,18 +438,20 @@
             color: var(--gold-accent);
         }
 
-        .about-text p {
-            color: var(--text-secondary);
-            margin-bottom: 15px;
-        }
+        .about-text p { color: var(--text-secondary); margin-bottom: 15px; }
 
         .about-visual {
-            height: 300px;
+            height: 400px;
             border-radius: 20px;
-            background: url('https://images.unsplash.com/photo-1614728263952-84ea256f9679?q=80&w=1000&auto=format&fit=crop') center/cover;
+            background: #1a1a24 url('mare.jpg') center/cover no-repeat;
             border: 1px solid var(--surface-border);
             position: relative;
+            box-shadow: inset 0 0 50px rgba(0,0,0,0.8);
+            cursor: pointer;
+            transition: 0.3s;
         }
+        
+        .about-visual:hover { transform: scale(1.02); }
 
         /* Depoimentos */
         .testimonials-grid {
@@ -440,32 +471,11 @@
             gap: 15px;
         }
 
-        .stars {
-            color: var(--gold-accent);
-            display: flex;
-            gap: 4px;
-        }
-
-        .testimonial-text {
-            font-style: italic;
-            color: var(--text-secondary);
-        }
-
-        .testimonial-author {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-top: auto;
-        }
-
-        .author-info h4 {
-            font-size: 0.95rem;
-        }
-
-        .author-info span {
-            font-size: 0.8rem;
-            color: var(--text-secondary);
-        }
+        .stars { color: var(--gold-accent); display: flex; gap: 4px; }
+        .testimonial-text { font-style: italic; color: var(--text-secondary); }
+        .testimonial-author { display: flex; align-items: center; gap: 12px; margin-top: auto; }
+        .author-info h4 { font-size: 0.95rem; }
+        .author-info span { font-size: 0.8rem; color: var(--text-secondary); }
 
         /* Rodapé */
         footer {
@@ -480,11 +490,7 @@
             gap: 30px;
         }
 
-        .footer-col h4 {
-            margin-bottom: 15px;
-            color: var(--text-primary);
-        }
-
+        .footer-col h4 { margin-bottom: 15px; color: var(--text-primary); }
         .footer-col p, .footer-col a {
             color: var(--text-secondary);
             text-decoration: none;
@@ -494,16 +500,9 @@
             transition: 0.3s;
         }
 
-        .footer-col a:hover {
-            color: var(--gold-accent);
-        }
+        .footer-col a:hover { color: var(--gold-accent); }
 
-        .social-links {
-            display: flex;
-            gap: 15px;
-            margin-top: 10px;
-        }
-
+        .social-links { display: flex; gap: 15px; margin-top: 10px; }
         .social-links a {
             display: flex;
             justify-content: center;
@@ -516,9 +515,17 @@
             transition: 0.3s;
         }
 
-        .social-links a:hover {
-            background: var(--gold-accent);
-            color: #000;
+        .social-links a:hover { background: var(--gold-accent); color: #000; }
+
+        .copyright {
+            width: 100%;
+            text-align: center;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid var(--surface-border);
+            color: var(--text-secondary);
+            font-size: 0.8rem;
+            line-height: 1.5;
         }
 
         /* Botão Flutuante WhatsApp */
@@ -542,58 +549,113 @@
             transition: 0.3s;
         }
 
-        .whatsapp-float:hover {
-            transform: scale(1.1);
-            box-shadow: 0 0 20px rgba(37, 211, 102, 0.5);
+        .whatsapp-float:hover { transform: scale(1.1); box-shadow: 0 0 20px rgba(37, 211, 102, 0.5); }
+
+        /* =========================================
+           ESTILOS DOS MODAIS (JANELAS POP-UP) 
+           ========================================= */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            z-index: 1000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: 0.3s ease;
         }
+
+        .modal-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .modal-content {
+            background: #121216;
+            border: 1px solid var(--gold-accent);
+            border-radius: 24px;
+            width: 90%;
+            max-width: 800px;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+            transform: translateY(20px);
+            transition: 0.4s ease;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.8);
+        }
+
+        .modal-overlay.active .modal-content {
+            transform: translateY(0);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: rgba(255,255,255,0.1);
+            border: none;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 10;
+            transition: 0.3s;
+        }
+
+        .modal-close:hover { background: var(--gold-accent); color: black; }
+
+        /* Layout interno do modal da Maré */
+        .modal-hero {
+            height: 300px;
+            background: #000 url('mare.jpg') center top/cover no-repeat;
+            border-radius: 24px 24px 0 0;
+            position: relative;
+        }
+
+        .modal-hero::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            background: linear-gradient(to top, #121216, transparent);
+        }
+
+        .modal-body { padding: 30px; }
+        .modal-body h2 { font-family: 'Cinzel', serif; color: var(--gold-accent); font-size: 2.2rem; margin-bottom: 5px; }
+        .modal-body .subtitle { color: var(--text-secondary); font-style: italic; margin-bottom: 20px; }
+        .modal-body p { margin-bottom: 15px; color: #ccc; }
 
         /* Responsividade */
         @media (max-width: 1024px) {
-            .about-section {
-                grid-template-columns: 1fr;
-            }
-            .hero-title {
-                font-size: 2.5rem;
-            }
+            .about-section { grid-template-columns: 1fr; }
+            .hero-title { font-size: 2.5rem; }
         }
 
         @media (max-width: 768px) {
-            .app-container {
-                flex-direction: column;
-                padding: 10px;
-            }
-            .sidebar {
-                width: 100%;
-                height: auto;
-                flex-direction: row;
-                justify-content: space-between;
-                padding: 15px 20px;
-                position: relative;
-                top: 0;
-            }
-            .nav-icons {
-                flex-direction: row;
-            }
-            .topbar {
-                flex-direction: column;
-                gap: 15px;
-            }
-            .nav-links {
-                display: none; /* Em um projeto real, aqui entraria um menu hamburguer */
-            }
-            .hero-section {
-                padding: 40px 20px;
-            }
-            .hero-title {
-                font-size: 2rem;
-            }
-            .hero-buttons {
-                flex-direction: column;
-            }
-            footer {
-                flex-direction: column;
-                padding: 20px;
-            }
+            .app-container { flex-direction: column; padding: 10px; padding-top: 20px; }
+            .sidebar { display: none; }
+            .topbar { padding: 15px 20px; }
+            .nav-links { display: none; }
+            .menu-toggle { display: block; }
+            .hero-section { padding: 40px 20px; min-height: auto; }
+            .hero-title { font-size: 2rem; }
+            .hero-buttons { flex-direction: column; }
+            footer { flex-direction: column; padding: 20px; }
+            .about-visual { height: 300px; }
+            .modal-hero { height: 200px; }
         }
     </style>
 </head>
@@ -605,12 +667,23 @@
         <div class="blob blob-2"></div>
     </div>
 
+    <!-- Menu Mobile Off-Canvas -->
+    <div class="mobile-menu" id="mobileMenu">
+        <button class="close-btn" onclick="toggleMenu()">
+            <i data-lucide="x" size="28"></i>
+        </button>
+        <a href="#" onclick="toggleMenu()"><i data-lucide="home" size="18"></i> Início</a>
+        <a href="#sobre" onclick="toggleMenu()"><i data-lucide="book-open" size="18"></i> O Universo</a>
+        <a href="#mundos" onclick="toggleMenu()"><i data-lucide="globe" size="18"></i> Mundos</a>
+        <a href="#" onclick="toggleMenu()"><i data-lucide="users" size="18"></i> Personagens</a>
+        <a href="#contato" onclick="toggleMenu()"><i data-lucide="mail" size="18"></i> Contato</a>
+    </div>
+
     <div class="app-container">
         
-        <!-- Sidebar -->
+        <!-- Sidebar Desktop -->
         <aside class="sidebar">
             <div class="logo-icon" title="Nexora">
-                <!-- Ícone de Ouroboros customizado via SVG -->
                 <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/>
                     <path d="M12 6c-3.31 0-6 2.69-6 6s2.69 6 6 6 6-2.69 6-6"/>
@@ -621,8 +694,8 @@
                 <a href="#" class="active" title="Início"><i data-lucide="home"></i></a>
                 <a href="#sobre" title="Sobre"><i data-lucide="book-open"></i></a>
                 <a href="#mundos" title="Mundos"><i data-lucide="globe"></i></a>
-                <a href="#" title="Perfil"><i data-lucide="user"></i></a>
-                <a href="#" title="Configurações"><i data-lucide="settings"></i></a>
+                <a href="#" title="Personagens"><i data-lucide="users"></i></a>
+                <a href="#contato" title="Contato"><i data-lucide="mail"></i></a>
             </nav>
         </aside>
 
@@ -635,17 +708,19 @@
                     <a href="#" class="active">Início</a>
                     <a href="#sobre">O Universo</a>
                     <a href="#mundos">Mundos</a>
-                    <a href="#personagens">Personagens</a>
+                    <a href="#">Personagens</a>
                     <a href="#contato">Contato</a>
                 </div>
                 <div class="user-actions">
-                    <button class="btn-primary">
+                    <button class="btn-primary" onclick="openModal('modal-construcao')">
                         <i data-lucide="sparkles" size="16"></i> Explorar Nexora
                     </button>
                     <div class="user-profile">
                         <div class="avatar">N</div>
-                        <span>Criador</span>
                     </div>
+                    <button class="menu-toggle" onclick="toggleMenu()">
+                        <i data-lucide="menu" size="24"></i>
+                    </button>
                 </div>
             </header>
 
@@ -656,9 +731,9 @@
                     <h1 class="hero-title">Bem-vindo ao <br>Universo Nexora</h1>
                     <p class="hero-subtitle">Explore as crônicas, os reinos esquecidos e os heróis que moldam o destino de múltiplas realidades. Uma jornada narrativa imersiva espera por você.</p>
                     <div class="hero-buttons">
-                        <a href="#mundos" class="btn-primary">
+                        <button class="btn-primary" onclick="openModal('modal-construcao')">
                             <i data-lucide="compass" size="18"></i> Iniciar Jornada
-                        </a>
+                        </button>
                         <a href="#sobre" class="btn-outline">
                             <i data-lucide="play-circle" size="18"></i> Conhecer a Lore
                         </a>
@@ -669,10 +744,88 @@
             <!-- Seção: Mundos / Destaques -->
             <div class="section-header" id="mundos">
                 <h2 class="section-title">Explore os Setores</h2>
-                <a href="#" class="btn-text">Ver todos</a>
+                <a href="#" class="btn-text" onclick="openModal('modal-construcao')">Ver todos</a>
             </div>
             
             <div class="grid-cards">
-                <div class="card">
+                <!-- Card da Maré (Abre a ficha dela) -->
+                <div class="card" style="border-color: rgba(212, 175, 55, 0.3);" onclick="openModal('modal-mare')">
+                    <div class="card-icon"><i data-lucide="droplets"></i></div>
+                    <h3>A Maré</h3>
+                    <p>Guardiã das águas primordiais. Seu poder flui entre a criação e a destruição dos mundos.</p>
+                </div>
+                
+                <div class="card" onclick="openModal('modal-construcao')">
                     <div class="card-icon"><i data-lucide="mountain"></i></div>
-                    <h3>Reino
+                    <h3>Reino de Aethel</h3>
+                    <p>Montanhas flutuantes e magia antiga. O berço dos primeiros guardiões.</p>
+                </div>
+                <div class="card" onclick="openModal('modal-construcao')">
+                    <div class="card-icon"><i data-lucide="zap"></i></div>
+                    <h3>Metrópole Neon</h3>
+                    <p>Uma cidade futurista movida a energia instável e segredos corporativos.</p>
+                </div>
+                <div class="card" onclick="openModal('modal-construcao')">
+                    <div class="card-icon"><i data-lucide="waves"></i></div>
+                    <h3>Abismo Profundo</h3>
+                    <p>Os oceanos escuros do planeta onde criaturas ancestrais repousam.</p>
+                </div>
+            </div>
+
+            <!-- Sobre Nós -->
+            <section class="about-section" id="sobre">
+                <div class="about-text">
+                    <h2>O Que é Nexora?</h2>
+                    <p>Nexora não é apenas um mundo; é um multiverso interconectado. Nascido da imaginação e moldado por conflitos épicos, cada canto deste universo guarda uma história esperando para ser contada.</p>
+                    <p>Atualmente, estamos construindo os pilares desta realidade. Em breve, você poderá acessar os livros, as artes conceituais e as crônicas dos personagens que habitam estes reinos.</p>
+                    <br>
+                    <button class="btn-outline" style="display: inline-flex;" onclick="openModal('modal-construcao')">
+                        <i data-lucide="book" size="18"></i> Ler o Manifesto
+                    </button>
+                </div>
+                <!-- Imagem da Maré (Clicável) -->
+                <div class="about-visual" title="Clique para ver a ficha da Maré" onclick="openModal('modal-mare')"></div>
+            </section>
+
+            <!-- Depoimentos -->
+            <div class="section-header" style="margin-top: 40px;">
+                <h2 class="section-title">Vozes do Multiverso</h2>
+            </div>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="stars">
+                        <i data-lucide="star" fill="currentColor" size="16"></i>
+                        <i data-lucide="star" fill="currentColor" size="16"></i>
+                        <i data-lucide="star" fill="currentColor" size="16"></i>
+                        <i data-lucide="star" fill="currentColor" size="16"></i>
+                        <i data-lucide="star" fill="currentColor" size="16"></i>
+                    </div>
+                    <p class="testimonial-text">"A lore de Nexora é absurdamente imersiva. A forma como os mundos se conectam me lembra os grandes clássicos da ficção científica, mas com um toque de fantasia único."</p>
+                    <div class="testimonial-author">
+                        <div class="avatar">L</div>
+                        <div class="author-info"><h4>Lucas Andrade</h4><span>Leitor Beta</span></div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="stars">
+                        <i data-lucide="star" fill="currentColor" size="16"></i>
+                        <i data-lucide="star" fill="currentColor" size="16"></i>
+                        <i data-lucide="star" fill="currentColor" size="16"></i>
+                        <i data-lucide="star" fill="currentColor" size="16"></i>
+                        <i data-lucide="star" fill="currentColor" size="16"></i>
+                    </div>
+                    <p class="testimonial-text">"O design do site e o conceito dos Ouroboros me deixaram de queixo caído. É o tipo de universo que você quer explorar por horas a fio."</p>
+                    <div class="testimonial-author">
+                        <div class="avatar">M</div>
+                        <div class="author-info"><h4>Marina Silva</h4><span>Artista Conceitual</span></div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="stars">
+                        <i data-lucide="star" fill="currentColor" size="16"></i>
+                        <i data-lucide="star" fill="currentColor" size="16"></i>
+                        <i data-lucide="star" fill="currentColor" size="16"></i>
+                        <i data-lucide="star" fill="currentColor" size="16"></i>
+                        <i data-lucide="star" fill="currentColor" size="16"></i>
+                    </div>
+                    <p class="testimonial-text">"Estou acompanhando o desenvolvimento desde o início. A atmosfera 'dark sci-fi' é exatamente o que eu procurava para me inspirar nos meus próprios projetos
