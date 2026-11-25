@@ -151,6 +151,58 @@
         .big-card:hover .big-card-icon { transform: scale(1.1) rotate(5deg); }
         .big-card h3 { font-family: 'Cinzel', serif; font-size: 1.5rem; margin-bottom: 10px; color: var(--text-primary); }
         .big-card p { color: var(--text-secondary); font-size: 0.9rem; }
+        /* Grid de Personagens */
+.character-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 25px;
+    margin-top: 20px;
+}
+
+.char-card {
+    background: var(--surface-color);
+    backdrop-filter: blur(16px);
+    border: 1px solid var(--surface-border);
+    border-radius: 20px;
+    overflow: hidden;
+    cursor: pointer;
+    text-align: center;
+    transition: all 0.4s ease;
+    position: relative;
+}
+
+.char-card:hover {
+    transform: translateY(-10px);
+    border-color: var(--gold-accent);
+    box-shadow: 0 20px 40px rgba(212, 175, 55, 0.2);
+}
+
+.char-img {
+    height: 300px;
+    background-size: cover;
+    background-position: center top;
+    border-bottom: 1px solid var(--surface-border);
+    transition: transform 0.4s ease;
+}
+
+.char-card:hover .char-img {
+    transform: scale(1.05);
+}
+
+.char-card h3 {
+    margin-top: 15px;
+    font-family: 'Cinzel', serif;
+    color: var(--gold-accent);
+    font-size: 1.3rem;
+    padding: 0 10px;
+}
+
+.char-card p {
+    color: var(--text-secondary);
+    padding: 10px 15px 20px;
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
         
         /* Fundos das caixas */
         .card-livros::before { background-image: url('fundo-livros.png'); }
