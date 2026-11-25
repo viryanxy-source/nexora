@@ -368,3 +368,83 @@
 <div class="modal-overlay" id="modal-mare">
     <div class="modal-content">
         <button class="modal-close" onclick="closeModal('modal-mare')"><i data-luc
+    <!-- MODAIS -->
+    <div class="modal-overlay" id="modal-mare">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal('modal-mare')"><i data-lucide="x"></i></button>
+            <div class="modal-hero"></div>
+            <div class="modal-body">
+                <h2>A Maré</h2>
+                <p style="color: var(--gold-accent); margin-bottom: 15px;">Personificação da Água nos Infinitos Universos</p>
+                <p>Ela não é apenas a guardiã, ela é a própria essência da água em todas as realidades. Seu poder flui entre a criação e a destruição, moldando mundos com uma simples onda.</p>
+                <button class="btn-fav" onclick="toggleFavorite('A Maré')"><i data-lucide="star" size="16"></i> Favoritar</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="modal-construcao">
+        <div class="modal-content modal-simple">
+            <button class="modal-close" onclick="closeModal('modal-construcao')"><i data-lucide="x"></i></button>
+            <i data-lucide="hammer" size="48"></i>
+            <h2>Portal em Construção</h2>
+            <p>O criador ainda está tecendo esta parte do universo. Volte em breve!</p>
+        </div>
+    </div>
+
+    <script>
+        lucide.createIcons();
+        function toggleMenu() { document.getElementById('mobileMenu').classList.toggle('active'); }
+        function switchPage(pageId) {
+            document.querySelectorAll('.page-section').forEach(page => page.classList.remove('active'));
+            document.getElementById('page-' + pageId).classList.add('active');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+        function openModal(modalId) { document.getElementById(modalId).classList.add('active'); }
+        function closeModal(modalId) { document.getElementById(modalId).classList.remove('active'); }
+        
+        document.querySelectorAll('.modal-overlay').forEach(overlay => {
+            overlay.addEventListener('click', function(e) { if (e.target === this) closeModal(this.id); });
+        });
+
+        function toggleReadMore() {
+            const content = document.getElementById('inspirationContent');
+            const btn = document.getElementById('btnReadMore');
+            content.classList.toggle('expanded');
+            if (content.classList.contains('expanded')) {
+                btn.innerHTML = 'Ler menos <i data-lucide="chevron-up" size="16"></i>';
+            } else {
+                btn.innerHTML = 'Ler mais <i data-lucide="chevron-down" size="16"></i>';
+            }
+            lucide.createIcons();
+        }
+
+        function toggleFavorite(itemName) {
+            let favs = JSON.parse(localStorage.getItem('nexoraFavs')) || [];
+            const btn = event.target.closest('.btn-fav');
+            if (favs.includes(itemName)) {
+                favs = favs.filter(f => f !== itemName);
+                btn.classList.remove('active');
+            } else {
+                favs.push(itemName);
+                btn.classList.add('active');
+            }
+            localStorage.setItem('nexoraFavs', JSON.stringify(favs));
+            updateFavoritesList();
+        }
+
+        function updateFavoritesList() {
+            const list = document.getElementById('favoritos-list');
+            if (!list) return;
+            let favs = JSON.parse(localStorage.getItem('nexoraFavs')) || [];
+            if (favs.length === 0) {
+                list.innerHTML = '<p style="font-size: 0.8rem; font-style: italic; color: #666;">Nenhum favorito ainda.</p>';
+            } else {
+                list.innerHTML = favs.map(fav => `<div style="background: rgba(212, 175, 55, 0.2); border: 1px solid var(--gold-accent); padding: 10px; border-radius: 8px; font-size: 0.9rem; color: var(--gold-accent); font-weight: bold;"><i data-lucide="star" size="14" style="display:inline; margin-right: 5px;"></i> ${fav}</div>`).join('');
+            }
+            lucide.createIcons();
+        }
+
+        document.addEventListener('DOMContentLoaded', updateFavoritesList);
+    </script>
+</body>
+        </html>
