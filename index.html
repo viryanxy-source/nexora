@@ -17,7 +17,6 @@
         }
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; scroll-behavior: smooth; }
         
-        /* Fundo fixo fluido */
         body { 
             background-color: var(--bg-color); 
             background-image: url('https://images.unsplash.com/photo-1462331940025-496dfbfc7564?q=80&w=2000&auto=format&fit=crop');
@@ -38,7 +37,6 @@
         
         .app-container { display: flex; max-width: 1600px; margin: 0 auto; padding: 20px; min-height: 100vh; gap: 40px; }
         
-        /* Menu Lateral (Desktop) */
         .sidebar { width: 80px; background: var(--surface-color); backdrop-filter: blur(16px); border: 1px solid var(--surface-border); border-radius: 24px; display: flex; flex-direction: column; align-items: center; padding: 30px 0; gap: 30px; position: sticky; top: 20px; height: calc(100vh - 40px); z-index: 10; }
         .logo-icon { color: var(--gold-accent); display: flex; justify-content: center; align-items: center; width: 50px; height: 50px; border-radius: 50%; border: 2px solid var(--gold-accent); box-shadow: 0 0 15px var(--gold-glow); cursor: pointer; }
         .nav-icons { display: flex; flex-direction: column; gap: 25px; }
@@ -47,7 +45,6 @@
         
         .main-content { flex: 1; display: flex; flex-direction: column; min-width: 0; padding-bottom: 40px; }
         
-        /* Topbar Mobile (Ouroboros como menu) */
         .mobile-topbar { display: none; width: 100%; justify-content: space-between; align-items: center; margin-bottom: 20px; }
         .mobile-logo { color: var(--gold-accent); display: flex; justify-content: center; align-items: center; width: 50px; height: 50px; border-radius: 50%; border: 2px solid var(--gold-accent); box-shadow: 0 0 15px var(--gold-glow); cursor: pointer; }
         
@@ -60,8 +57,8 @@
         .page-section.active { display: block; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
         
-        /* Blocos com espaçamento maior */
-        .hero-section { background: linear-gradient(to right, rgba(20, 20, 25, 0.9) 0%, rgba(20, 20, 25, 0.4) 100%), url('https://images.unsplash.com/photo-1462331940025-496dfbfc7564?q=80&w=2000&auto=format&fit=crop') center/cover no-repeat; border-radius: 28px; padding: 60px 40px; min-height: 400px; display: flex; flex-direction: column; justify-content: center; position: relative; overflow: hidden; border: 1px solid var(--surface-border); backdrop-filter: blur(10px); box-shadow: 0 20px 40px rgba(0,0,0,0.5); margin-bottom: 40px; }
+        /* ESPAÇAMENTO AJUSTADO AQUI */
+        .hero-section { background: linear-gradient(to right, rgba(20, 20, 25, 0.9) 0%, rgba(20, 20, 25, 0.4) 100%), url('https://images.unsplash.com/photo-1462331940025-496dfbfc7564?q=80&w=2000&auto=format&fit=crop') center/cover no-repeat; border-radius: 28px; padding: 60px 40px; min-height: 400px; display: flex; flex-direction: column; justify-content: center; position: relative; overflow: hidden; border: 1px solid var(--surface-border); backdrop-filter: blur(10px); box-shadow: 0 20px 40px rgba(0,0,0,0.5); margin-top: 4cm; margin-bottom: 4cm; }
         .hero-content { max-width: 600px; z-index: 2; }
         .tag { display: inline-flex; align-items: center; gap: 6px; background: rgba(212, 175, 55, 0.1); color: var(--gold-accent); padding: 6px 16px; border-radius: 20px; font-size: 0.8rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 20px; border: 1px solid rgba(212, 175, 55, 0.2); }
         .hero-title { font-family: 'Cinzel', serif; font-size: 3.5rem; line-height: 1.1; margin-bottom: 20px; text-shadow: 0 4px 20px rgba(0,0,0,0.5); }
@@ -70,7 +67,8 @@
         .btn-primary { background: var(--text-primary); color: var(--bg-color); padding: 10px 24px; border-radius: 30px; text-decoration: none; font-weight: 600; font-size: 0.9rem; transition: 0.3s; display: flex; align-items: center; gap: 8px; border: none; cursor: pointer; }
         .btn-primary:hover { background: var(--gold-accent); color: #000; box-shadow: 0 0 20px var(--gold-glow); }
         
-        .about-section { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; background: rgba(25, 25, 30, 0.65); backdrop-filter: blur(16px); border: 1px solid var(--surface-border); border-radius: 28px; padding: 40px; box-shadow: 0 20px 40px rgba(0,0,0,0.5); margin-bottom: 40px; }
+        /* ESPAÇAMENTO AJUSTADO AQUI */
+        .about-section { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; background: rgba(25, 25, 30, 0.65); backdrop-filter: blur(16px); border: 1px solid var(--surface-border); border-radius: 28px; padding: 40px; box-shadow: 0 20px 40px rgba(0,0,0,0.5); margin-bottom: 4cm; }
         .about-text h2 { font-family: 'Cinzel', serif; font-size: 2rem; margin-bottom: 20px; color: var(--gold-accent); }
         .about-text p { color: var(--text-secondary); margin-bottom: 15px; }
         .about-visual { height: 400px; border-radius: 20px; background: #1a1a24 url('mare.jpg') center top/cover no-repeat; border: 1px solid var(--surface-border); position: relative; box-shadow: inset 0 0 50px rgba(0,0,0,0.8); cursor: pointer; transition: 0.3s; }
@@ -80,7 +78,8 @@
         .btn-back { background: rgba(255,255,255,0.05); border: 1px solid var(--surface-border); color: var(--text-primary); padding: 10px; border-radius: 12px; cursor: pointer; }
         .page-title { font-family: 'Cinzel', serif; font-size: 2.5rem; color: var(--gold-accent); }
         
-        .lore-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
+        /* ESPAÇAMENTO AJUSTADO AQUI */
+        .lore-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 40px; margin-top: 2cm; }
         .lore-square { background: rgba(30, 30, 35, 0.95); backdrop-filter: blur(20px); border: 1px solid var(--surface-border); border-radius: 24px; padding: 50px 30px; text-align: center; cursor: pointer; transition: 0.4s; display: flex; flex-direction: column; align-items: center; position: relative; overflow: hidden; box-shadow: inset 0 0 20px rgba(255,255,255,0.02); }
         .lore-square:hover { transform: translateY(-10px); border-color: rgba(212, 175, 55, 0.5); background: rgba(40, 40, 48, 0.95); }
         
@@ -114,15 +113,20 @@
         .modal-body h2 { font-family: 'Cinzel', serif; color: var(--gold-accent); font-size: 2.2rem; margin-bottom: 5px; }
         .modal-simple { padding: 50px 30px; text-align: center; }
         
-        footer { padding: 40px; background: rgba(25, 25, 30, 0.65); backdrop-filter: blur(16px); border: 1px solid var(--surface-border); border-radius: 28px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 30px; box-shadow: 0 20px 40px rgba(0,0,0,0.5); }
+        footer { padding: 40px; background: rgba(25, 25, 30, 0.65); backdrop-filter: blur(16px); border: 1px solid var(--surface-border); border-radius: 28px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 30px; box-shadow: 0 20px 40px rgba(0,0,0,0.5); margin-bottom: 2cm;}
         .footer-col h4 { margin-bottom: 15px; color: var(--text-primary); }
         .footer-col a { color: var(--text-secondary); text-decoration: none; display: block; margin-bottom: 10px; font-size: 0.9rem; }
         .copyright { width: 100%; text-align: center; margin-top: 20px; padding-top: 20px; border-top: 1px solid var(--surface-border); color: var(--text-secondary); font-size: 0.8rem; }
         
-        @media (max-width: 768px) {
-            .app-container { padding: 15px; }
+        @media (max-width: 1024px) {
             .sidebar { display: none; } 
             .mobile-topbar { display: flex; }
+            .app-container { padding: 15px; }
+            .hero-section { margin-top: 1cm; margin-bottom: 2cm; } /* Ajuste mobile */
+            .about-section { margin-bottom: 2cm; }
+        }
+        
+        @media (max-width: 768px) {
             .hero-title { font-size: 2.2rem; } 
             .hero-buttons { flex-direction: column; }
             .about-section { grid-template-columns: 1fr; } 
@@ -135,7 +139,6 @@
 </head>
 <body>
 
-    <!-- Menu Hambúrguer Mobile -->
     <div class="mobile-menu" id="mobileMenu">
         <button class="close-btn" onclick="toggleMenu()"><i data-lucide="x" size="28"></i></button>
         <a onclick="toggleMenu(); switchPage('home')"><i data-lucide="home" size="18"></i> Início</a>
@@ -146,7 +149,6 @@
 
     <div class="app-container">
         
-        <!-- Sidebar Desktop -->
         <aside class="sidebar">
             <div class="logo-icon" onclick="switchPage('home')">
                 <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/><path d="M12 6c-3.31 0-6 2.69-6 6s2.69 6 6 6 6-2.69 6-6"/></svg>
@@ -161,7 +163,6 @@
 
         <main class="main-content">
             
-            <!-- Topbar Mobile (O Ouroboros vira o botão do menu) -->
             <header class="mobile-topbar">
                 <div class="mobile-logo" onclick="toggleMenu()">
                     <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
