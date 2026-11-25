@@ -277,6 +277,8 @@
             <a onclick="switchPage('history')" aria-label="Jornada"><i data-lucide="book"></i></a>
             <a onclick="switchPage('lore')" aria-label="Lore"><i data-lucide="globe"></i></a>
             <a onclick="switchPage('creator')" aria-label="Criador"><i data-lucide="user"></i></a>
+            <a onclick="switchPage('library')" aria-label="Biblioteca"><i data-lucide="library"></i></a>
+                <a onclick="switchPage('about')" aria-label="Sobre"><i data-lucide="info"></i></a>
         </nav>
     </aside>
     <main class="main-content">
@@ -436,6 +438,63 @@
                                 <a href="#" id="link-email" aria-label="E-mail"><i data-lucide="mail" size="18"></i> E-mail</a>
                                 <a href="#" id="link-discord" aria-label="Discord"><i data-lucide="message-circle" size="18"></i> Discord</a>
                             </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <!-- PÁGINA: BIBLIOTECA -->
+            <div id="page-library" class="page-section">
+                <div class="topbar">
+                    <div class="breadcrumbs">
+                        <a onclick="switchPage('home')">Início</a>
+                        <span class="separator">/</span>
+                        <a class="active">Biblioteca</a>
+                    </div>
+                    <div class="user-avatar">V</div>
+                </div>
+                <div class="page-header">
+                    <button class="btn-back" onclick="switchPage('home')" aria-label="Voltar"><i data-lucide="arrow-left"></i></button>
+                    <h1 class="page-title">Biblioteca</h1>
+                </div>
+                <div class="info-block animate-in" style="text-align: center; padding: 60px 30px;">
+                    <i data-lucide="library" size="48" style="color: var(--gold-accent); margin-bottom: 20px;"></i>
+                    <h3>Sua Biblioteca está vazia</h3>
+                    <p style="margin-top: 10px; color: var(--text-secondary);">Os livros e contos do universo Nexora ainda estão sendo escritos.</p>
+                </div>
+            </div>
+
+            <!-- PÁGINA: SOBRE O PROJETO -->
+            <div id="page-about" class="page-section">
+                <div class="topbar">
+                    <div class="breadcrumbs">
+                        <a onclick="switchPage('home')">Início</a>
+                        <span class="separator">/</span>
+                        <a class="active">Sobre o Projeto</a>
+                    </div>
+                    <div class="user-avatar">V</div>
+                </div>
+                <div class="page-header">
+                    <button class="btn-back" onclick="switchPage('home')" aria-label="Voltar"><i data-lucide="arrow-left"></i></button>
+                    <h1 class="page-title">Sobre o Projeto</h1>
+                </div>
+                
+                <div class="creator-layout">
+                    <div class="creator-info" style="grid-column: 1 / -1;">
+                        <div class="info-block animate-in">
+                            <h3><i data-lucide="code"></i> Como o Site foi Criado</h3>
+                            <p style="color: var(--text-secondary); line-height: 1.8;">[O site foi criado e editado pelo autor, que possuí alto conhecimento em linguagens de programação, com auxílio de IA.]</p>
+                        </div>
+                        <div class="info-block animate-in">
+                            <h3><i data-lucide="image"></i> Imagens e Ilustrações</h3>
+                            <p style="color: var(--text-secondary); line-height: 1.8;">[Aqui você explica como criou as imagens, se usou IA, drew à mão, etc.]</p>
+                        </div>
+                        <div class="info-block animate-in">
+                            <h3><i data-lucide="pen-tool"></i> Roteiros e Histórias</h3>
+                            <p style="color: var(--text-secondary); line-height: 1.8;">[Roteiros de autoria 100% do autor, com uso de IA apenas para refinamento de pronúncia, pontuaçõe, e correções ortográficas.]</p>
+                        </div>
+                        <div class="info-block animate-in">
+                            <h3><i data-lucide="globe"></i> O Universo Nexora</h3>
+                            <p style="color: var(--text-secondary); line-height: 1.8;">[O universo apenas fluiu da mente do autor, que busca criar poderes e personagens pouco convencionais]</p>
                         </div>
                     </div>
                 </div>
