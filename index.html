@@ -11,19 +11,32 @@
 
     <style>
         :root {
-            --bg-color: #0a0a0c; --surface-color: rgba(25, 25, 30, 0.6);
+            --bg-color: #0a0a0c; --surface-color: rgba(25, 25, 30, 0.7);
             --surface-border: rgba(255, 255, 255, 0.08); --text-primary: #f0f0f0;
             --text-secondary: #a0a0ab; --gold-accent: #d4af37; --gold-glow: rgba(212, 175, 55, 0.3);
             --fluid-glow: radial-gradient(circle at 50% 50%, rgba(20, 20, 30, 1) 0%, rgba(10, 10, 12, 1) 100%);
         }
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; scroll-behavior: smooth; }
-        body { background-color: var(--bg-color); background-image: var(--fluid-glow); color: var(--text-primary); min-height: 100vh; overflow-x: hidden; line-height: 1.6; }
         
-        .bg-blobs { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -1; overflow: hidden; opacity: 0.4; pointer-events: none; }
-        .blob { position: absolute; border-radius: 50%; filter: blur(100px); animation: float 20s infinite alternate ease-in-out; }
-        .blob-1 { background: #2a2a35; width: 400px; height: 400px; top: -10%; left: -10%; }
-        .blob-2 { background: #d4af37; width: 300px; height: 300px; bottom: 10%; right: -5%; opacity: 0.15; animation-delay: -5s; }
-        @keyframes float { 0% { transform: translate(0, 0) scale(1); } 100% { transform: translate(50px, 50px) scale(1.1); } }
+        /* FUNDO FIXO FLUIDO */
+        body { 
+            background-color: var(--bg-color); 
+            background-image: url('https://images.unsplash.com/photo-1462331940025-496dfbfc7564?q=80&w=2000&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: var(--text-primary); 
+            min-height: 100vh; 
+            overflow-x: hidden; 
+            line-height: 1.6; 
+        }
+        
+        /* Overlay escuro para o fundo não ofuscar o texto */
+        body::before {
+            content: ''; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+            background: linear-gradient(to bottom, rgba(10,10,12,0.85), rgba(10,10,12,0.95));
+            z-index: -1; pointer-events: none;
+        }
         
         .app-container { display: flex; max-width: 1600px; margin: 0 auto; padding: 20px; min-height: 100vh; gap: 20px; }
         
@@ -33,15 +46,11 @@
         .nav-icons a { color: var(--text-secondary); transition: 0.3s; display: flex; justify-content: center; align-items: center; padding: 10px; border-radius: 12px; cursor: pointer; }
         .nav-icons a:hover, .nav-icons a.active { color: var(--gold-accent); background: rgba(212, 175, 55, 0.1); transform: scale(1.1); }
         
-        .main-content { flex: 1; display: flex; flex-direction: column; gap: 20px; min-width: 0; }
+        .main-content { flex: 1; display: flex; flex-direction: column; gap: 40px; min-width: 0; padding-bottom: 40px; }
         
-        .topbar { display: flex; justify-content: space-between; align-items: center; background: var(--surface-color); backdrop-filter: blur(16px); border: 1px solid var(--surface-border); padding: 15px 30px; border-radius: 20px; position: relative; z-index: 20; }
-        .nav-links { display: flex; gap: 30px; }
-        .nav-links a { color: var(--text-secondary); text-decoration: none; font-weight: 400; font-size: 0.95rem; transition: 0.3s; cursor: pointer; }
-        .nav-links a:hover, .nav-links a.active { color: var(--text-primary); font-weight: 600; }
+        /* Topbar mais limpa e transparente */
+        .topbar { display: flex; justify-content: flex-end; align-items: center; background: transparent; border: none; padding: 0 10px; position: relative; z-index: 20; }
         .user-actions { display: flex; align-items: center; gap: 20px; }
-        .btn-primary { background: var(--text-primary); color: var(--bg-color); padding: 10px 24px; border-radius: 30px; text-decoration: none; font-weight: 600; font-size: 0.9rem; transition: 0.3s; display: flex; align-items: center; gap: 8px; border: none; cursor: pointer; }
-        .btn-primary:hover { background: var(--gold-accent); color: #000; box-shadow: 0 0 20px var(--gold-glow); }
         .user-profile { display: flex; align-items: center; gap: 10px; }
         .avatar { width: 36px; height: 36px; border-radius: 50%; background: linear-gradient(135deg, #333, #d4af37); display: flex; justify-content: center; align-items: center; color: white; font-weight: bold; }
         
@@ -55,16 +64,17 @@
         .page-section.active { display: block; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
         
-        .hero-section { background: linear-gradient(to right, rgba(10, 10, 12, 0.9) 0%, rgba(10, 10, 12, 0.2) 100%), url('https://images.unsplash.com/photo-1462331940025-496dfbfc7564?q=80&w=2000&auto=format&fit=crop') center/cover no-repeat; background-color: #1a1a24; border-radius: 28px; padding: 60px 40px; min-height: 400px; display: flex; flex-direction: column; justify-content: center; position: relative; overflow: hidden; border: 1px solid var(--surface-border); }
+        /* Blocos flutuantes com fundo semi-transparente */
+        .hero-section { background: linear-gradient(to right, rgba(20, 20, 25, 0.9) 0%, rgba(20, 20, 25, 0.4) 100%), url('https://images.unsplash.com/photo-1462331940025-496dfbfc7564?q=80&w=2000&auto=format&fit=crop') center/cover no-repeat; border-radius: 28px; padding: 60px 40px; min-height: 400px; display: flex; flex-direction: column; justify-content: center; position: relative; overflow: hidden; border: 1px solid var(--surface-border); backdrop-filter: blur(10px); box-shadow: 0 20px 40px rgba(0,0,0,0.5); }
         .hero-content { max-width: 600px; z-index: 2; }
         .tag { display: inline-flex; align-items: center; gap: 6px; background: rgba(212, 175, 55, 0.1); color: var(--gold-accent); padding: 6px 16px; border-radius: 20px; font-size: 0.8rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 20px; border: 1px solid rgba(212, 175, 55, 0.2); }
         .hero-title { font-family: 'Cinzel', serif; font-size: 3.5rem; line-height: 1.1; margin-bottom: 20px; text-shadow: 0 4px 20px rgba(0,0,0,0.5); }
         .hero-subtitle { color: var(--text-secondary); font-size: 1.1rem; margin-bottom: 30px; }
         .hero-buttons { display: flex; gap: 15px; }
-        .btn-outline { background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); color: var(--text-primary); border: 1px solid var(--surface-border); padding: 12px 30px; border-radius: 30px; font-weight: 600; transition: 0.3s; display: flex; align-items: center; justify-content: center; gap: 8px; cursor: pointer; }
-        .btn-outline:hover { background: rgba(255, 255, 255, 0.2); border-color: var(--text-primary); }
+        .btn-primary { background: var(--text-primary); color: var(--bg-color); padding: 10px 24px; border-radius: 30px; text-decoration: none; font-weight: 600; font-size: 0.9rem; transition: 0.3s; display: flex; align-items: center; gap: 8px; border: none; cursor: pointer; }
+        .btn-primary:hover { background: var(--gold-accent); color: #000; box-shadow: 0 0 20px var(--gold-glow); }
         
-        .about-section { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; background: var(--surface-color); border: 1px solid var(--surface-border); border-radius: 28px; padding: 40px; margin-top: 20px; }
+        .about-section { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; background: rgba(25, 25, 30, 0.65); backdrop-filter: blur(16px); border: 1px solid var(--surface-border); border-radius: 28px; padding: 40px; box-shadow: 0 20px 40px rgba(0,0,0,0.5); }
         .about-text h2 { font-family: 'Cinzel', serif; font-size: 2rem; margin-bottom: 20px; color: var(--gold-accent); }
         .about-text p { color: var(--text-secondary); margin-bottom: 15px; }
         .about-visual { height: 400px; border-radius: 20px; background: #1a1a24 url('mare.jpg') center top/cover no-repeat; border: 1px solid var(--surface-border); position: relative; box-shadow: inset 0 0 50px rgba(0,0,0,0.8); cursor: pointer; transition: 0.3s; }
@@ -92,7 +102,7 @@
         .creator-layout { display: grid; grid-template-columns: 1fr 2fr; gap: 40px; margin-top: 20px; }
         .creator-photo { width: 100%; height: 400px; border-radius: 24px; background: #1a1a24 url('criador.jpg') center top/cover no-repeat; border: 2px solid var(--gold-accent); box-shadow: 0 0 30px var(--gold-glow); }
         .creator-info { display: flex; flex-direction: column; gap: 20px; }
-        .info-block { background: var(--surface-color); border: 1px solid var(--surface-border); border-radius: 20px; padding: 30px; }
+        .info-block { background: var(--surface-color); backdrop-filter: blur(16px); border: 1px solid var(--surface-border); border-radius: 20px; padding: 30px; }
         .info-block h3 { font-family: 'Cinzel', serif; color: var(--gold-accent); font-size: 1.4rem; margin-bottom: 15px; display: flex; align-items: center; gap: 10px; }
         .info-block p { color: var(--text-secondary); }
         .contact-links { display: flex; gap: 15px; flex-wrap: wrap; margin-top: 10px; }
@@ -108,14 +118,15 @@
         .modal-body h2 { font-family: 'Cinzel', serif; color: var(--gold-accent); font-size: 2.2rem; margin-bottom: 5px; }
         .modal-simple { padding: 50px 30px; text-align: center; }
         
-        footer { margin-top: 40px; padding: 40px; background: var(--surface-color); border: 1px solid var(--surface-border); border-radius: 28px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 30px; }
+        footer { padding: 40px; background: rgba(25, 25, 30, 0.65); backdrop-filter: blur(16px); border: 1px solid var(--surface-border); border-radius: 28px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 30px; box-shadow: 0 20px 40px rgba(0,0,0,0.5); }
         .footer-col h4 { margin-bottom: 15px; color: var(--text-primary); }
         .footer-col a { color: var(--text-secondary); text-decoration: none; display: block; margin-bottom: 10px; font-size: 0.9rem; }
         .copyright { width: 100%; text-align: center; margin-top: 20px; padding-top: 20px; border-top: 1px solid var(--surface-border); color: var(--text-secondary); font-size: 0.8rem; }
         
         @media (max-width: 768px) {
             .app-container { flex-direction: column; padding: 10px; padding-top: 20px; }
-            .sidebar { display: none; } .nav-links { display: none; } .menu-toggle { display: block; }
+            .sidebar { display: none; } .menu-toggle { display: block; }
+            .topbar { justify-content: space-between; padding: 15px 20px; }
             .hero-title { font-size: 2rem; } .hero-buttons { flex-direction: column; }
             .about-section { grid-template-columns: 1fr; } .about-visual { height: 300px; }
             .creator-layout { grid-template-columns: 1fr; } .creator-photo { height: 350px; }
@@ -124,8 +135,6 @@
     </style>
 </head>
 <body>
-
-    <div class="bg-blobs"><div class="blob blob-1"></div><div class="blob blob-2"></div></div>
 
     <div class="mobile-menu" id="mobileMenu">
         <button class="close-btn" onclick="toggleMenu()"><i data-lucide="x" size="28"></i></button>
@@ -150,14 +159,8 @@
 
         <main class="main-content">
             <header class="topbar">
-                <div class="nav-links">
-                    <a onclick="switchPage('home')" class="active">Início</a>
-                    <a onclick="switchPage('history')">Iniciar Jornada</a>
-                    <a onclick="switchPage('lore')">Explorar a Lore</a>
-                    <a onclick="switchPage('creator')">O Criador</a>
-                </div>
+                <button class="menu-toggle" onclick="toggleMenu()"><i data-lucide="menu" size="24"></i></button>
                 <div class="user-actions">
-                    <button class="menu-toggle" onclick="toggleMenu()"><i data-lucide="menu" size="24"></i></button>
                     <div class="user-profile"><div class="avatar">V</div></div>
                 </div>
             </header>
@@ -170,7 +173,6 @@
                         <p class="hero-subtitle">Explore as crônicas, os reinos esquecidos e os heróis que moldam o destino de múltiplas realidades.</p>
                         <div class="hero-buttons">
                             <button class="btn-primary" onclick="switchPage('history')"><i data-lucide="compass" size="18"></i> Iniciar Jornada</button>
-                            <button class="btn-outline" onclick="switchPage('lore')"><i data-lucide="globe" size="18"></i> Explorar a Lore</button>
                         </div>
                     </div>
                 </section>
@@ -179,9 +181,8 @@
                     <div class="about-text">
                         <h2>O Que é Nexora?</h2>
                         <p>Nexora não é apenas um mundo; é um multiverso interconectado. Nascido da imaginação e moldado por conflitos épicos, cada canto deste universo guarda uma história esperando para ser contada.</p>
-                        <button class="btn-outline" onclick="switchPage('lore')"><i data-lucide="book" size="18"></i> Conhecer a Lore</button>
                     </div>
-                    <div class="about-visual" onclick="openModal('modal-mare')"></div>
+                    <div class="about-visual" onclick="switchPage('characters')"></div>
                 </section>
                 
                 <footer>
@@ -202,12 +203,13 @@
                 </div>
                 <div class="lore-grid">
                     <div class="lore-square" onclick="openModal('modal-construcao')">
-                        <div class="bg-image" style="background-image: url('fundo-livros.png'); opacity: 0.25; filter: invert(1);"></div>
+                        <div class="bg-image" style="background-image: url('fundo-livros.png'); opacity: 0.3; filter: invert(0.8) sepia(1) saturate(3) hue-rotate(5deg);"></div>
                         <div class="lore-icon"><i data-lucide="book" size="40"></i></div>
                         <h3>Livros e Contos</h3>
                         <p>Mergulhe nas crônicas oficiais do universo.</p>
                     </div>
                     <div class="lore-square" onclick="openModal('modal-construcao')">
+                        <div class="bg-image" style="background-image: url('fundo-cronologia.png'); opacity: 0.2;"></div>
                         <div class="lore-icon"><i data-lucide="hourglass" size="40"></i></div>
                         <h3>Cronologia</h3>
                         <p>A linha do tempo desde a criação até o caos atual.</p>
@@ -226,13 +228,13 @@
                         <p>Conheça os heróis, vilões e divindades.</p>
                     </div>
                     <div class="lore-square" onclick="openModal('modal-construcao')">
-                        <div class="bg-image" style="background-image: url('fundo-armas.png'); opacity: 0.15;"></div>
+                        <div class="bg-image" style="background-image: url('fundo-armas.png'); opacity: 0.2;"></div>
                         <div class="lore-icon"><i data-lucide="shield" size="40"></i></div>
                         <h3>Armas e Artefatos</h3>
                         <p>Itens lendários, magias e relíquias antigas.</p>
                     </div>
                     <div class="lore-square" onclick="openModal('modal-construcao')">
-                        <div class="bg-image" style="background-image: url('fundo-reinos.png'); opacity: 0.12;"></div>
+                        <div class="bg-image" style="background-image: url('fundo-reinos.png'); opacity: 0.2;"></div>
                         <div class="lore-icon"><i data-lucide="flag" size="40"></i></div>
                         <h3>Facções e Reinos</h3>
                         <p>Os grupos que moldam o destino dos mundos.</p>
