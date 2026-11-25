@@ -155,7 +155,7 @@
         }
     </style>
 </head>
- <body>
+<body>
 
     <div class="mobile-menu" id="mobileMenu">
         <button class="close-btn" onclick="toggleMenu()"><i data-lucide="x" size="28"></i></button>
@@ -187,7 +187,6 @@
                 </div>
             </header>
 
-            <!-- TELA 1: HOME -->
             <div id="page-home" class="page-section active">
                 <section class="hero-section">
                     <div class="hero-content">
@@ -311,77 +310,174 @@
         </div>
     </div>
 </div>
-<div id="page-history" class="page-section">
-    <div class="page-header">
-        <button class="btn-back" onclick="switchPage('home')"><i data-lucide="arrow-left" size="24"></i></button>
-        <h2 class="page-title">Iniciar Jornada</h2>
-    </div>
-    <div class="lore-grid">
-        <div class="lore-square" onclick="openModal('modal-construcao')">
-            <div class="bg-image" style="background-image: url('fundo-livros.png'); opacity: 0.3; filter: invert(0.8) sepia(1) saturate(3) hue-rotate(5deg);"></div>
-            <div class="lore-icon"><i data-lucide="book" size="40"></i></div>
-            <h3>Livros e Contos</h3>
-            <p>Mergulhe nas crônicas oficiais do universo.</p>
-        </div>
-        <div class="lore-square" onclick="openModal('modal-construcao')">
-            <div class="bg-image" style="background-image: url('fundo-cronologia.png'); opacity: 0.2;"></div>
-            <div class="lore-icon"><i data-lucide="hourglass" size="40"></i></div>
-            <h3>Cronologia</h3>
-            <p>A linha do tempo desde a criação até o caos atual.</p>
-        </div>
-    </div>
-</div>
+            <div id="page-library" class="page-section">
+                <div class="page-header">
+                    <button class="btn-back" onclick="switchPage('home')"><i data-lucide="arrow-left" size="24"></i></button>
+                    <h2 class="page-title">Meu Nexora</h2>
+                </div>
+                <div class="lore-grid" style="margin-top: 1cm;">
+                    <div class="lore-square" onclick="openModal('modal-construcao')" style="justify-content: flex-start; padding-top: 30px;">
+                        <div class="lore-icon"><i data-lucide="star" size="40"></i></div>
+                        <h3>Favoritos</h3>
+                        <p style="margin-bottom: 15px;">Seus arquivos e personagens salvos.</p>
+                        <div id="favoritos-list" style="width: 100%; display: flex; flex-direction: column; gap: 10px; z-index: 1;">
+                            <p style="font-size: 0.8rem; font-style: italic; color: #666;">Nenhum favorito ainda.</p>
+                        </div>
+                    </div>
+                    <div class="lore-square" onclick="openModal('modal-construcao')">
+                        <div class="lore-icon"><i data-lucide="clock" size="40"></i></div>
+                        <h3>Histórico</h3>
+                        <p>Continue sua leitura de onde parou.</p>
+                    </div>
+                    <div class="lore-square" onclick="openModal('modal-construcao')">
+                        <div class="lore-icon"><i data-lucide="user-check" size="40"></i></div>
+                        <h3>Meu Perfil</h3>
+                        <p>Seu nome, foto e conquistas no universo.</p>
+                    </div>
+                    <div class="lore-square" onclick="openModal('modal-construcao')">
+                        <div class="lore-icon"><i data-lucide="bell" size="40"></i></div>
+                        <h3>Novidades</h3>
+                        <p>Acompanhe as últimas atualizações de Nexora.</p>
+                    </div>
+                </div>
+            </div>
 
-<div id="page-lore" class="page-section">
-    <div class="page-header">
-        <button class="btn-back" onclick="switchPage('home')"><i data-lucide="arrow-left" size="24"></i></button>
-        <h2 class="page-title">Explorar a Lore</h2>
-    </div>
-    <div class="lore-grid">
-        <div class="lore-square" onclick="switchPage('characters')">
-            <div class="lore-icon"><i data-lucide="user" size="40"></i></div>
-            <h3>Personagens</h3>
-            <p>Conheça os heróis, vilões e divindades.</p>
-        </div>
-        <div class="lore-square" onclick="openModal('modal-construcao')">
-            <div class="bg-image" style="background-image: url('fundo-armas.png'); opacity: 0.2;"></div>
-            <div class="lore-icon"><i data-lucide="shield" size="40"></i></div>
-            <h3>Armas e Artefatos</h3>
-            <p>Itens lendários, magias e relíquias antigas.</p>
-        </div>
-        <div class="lore-square" onclick="openModal('modal-construcao')">
-            <div class="bg-image" style="background-image: url('fundo-reinos.png'); opacity: 0.2;"></div>
-            <div class="lore-icon"><i data-lucide="flag" size="40"></i></div>
-            <h3>Facções e Reinos</h3>
-            <p>Os grupos que moldam o destino dos mundos.</p>
-        </div>
-        <div class="lore-square" onclick="openModal('modal-construcao')">
-            <div class="lore-icon"><i data-lucide="skull" size="40"></i></div>
-            <h3>Bestiário</h3>
-            <p>Criaturas e monstros do multiverso.</p>
-        </div>
-        <div class="lore-square" onclick="openModal('modal-construcao')">
-            <div class="lore-icon"><i data-lucide="map" size="40"></i></div>
-            <h3>Atlas</h3>
-            <p>Mapas em alta resolução.</p>
-        </div>
-        <div class="lore-square" onclick="openModal('modal-construcao')">
-            <div class="lore-icon"><i data-lucide="book-open" size="40"></i></div>
-            <h3>Glossário</h3>
-            <p>Dicionário de termos de Nexora.</p>
-        </div>
-    </div>
-</div>
+            <div id="page-creator" class="page-section">
+                <div class="page-header">
+                    <button class="btn-back" onclick="switchPage('home')"><i data-lucide="arrow-left" size="24"></i></button>
+                    <h2 class="page-title">O Criador</h2>
+                </div>
+                <div class="creator-layout">
+                    <div class="creator-photo"></div>
+                    <div class="creator-info">
+                        <div class="info-block">
+                            <h3><i data-lucide="user"></i> Informações</h3>
+                            <p style="margin-bottom: 5px;"><strong>Nome:</strong> Victor Ryan Severino de Morais</p>
+                            <p style="margin-bottom: 5px;"><strong>Idade:</strong> 19 anos</p>
+                            <p><strong>Função:</strong> Autor e Criador do Universo Nexora</p>
+                        </div>
+                        
+                        <div class="info-block">
+                            <h3><i data-lucide="book-open"></i> Minha História</h3>
+                            <p style="font-style: italic; color: #d4af37; line-height: 1.6;">
+                                "Olá, sou Victor, criador de Nexora. Tenho 19 anos e, após múltiplos acontecimentos em minha vida — tentativas, perdas e desilusões —, decidi usar a escrita e a criatividade como o meu refúgio. Nexora é um reflexo direto da minha mente. Eu coloco um pedaço de mim em cada personagem, em cada mundo. Tudo isso nasceu do amor. Aproveitem a jornada."
+                            </p>
+                        </div>
+                        
+                        <div class="info-block">
+                            <h3><i data-lucide="mail"></i> Contato</h3>
+                            <p>Quer conversar sobre o universo, mandar teorias ou fazer uma parceria? Me chama!</p>
+                            <div class="contact-links">
+                                <a href="mailto:viryanxy@gmail.com"><i data-lucide="mail" size="18"></i> E-mail</a>
+                                <a href="https://discord.com/users/viryanxy" target="_blank"><i data-lucide="message-circle" size="18"></i> Discord</a>
+                            </div>
+                        </div>
+                        
+                        <!-- BARRAS DE PROGRESSO AQUI -->
+                        <div class="info-block">
+                            <h3><i data-lucide="activity"></i> Status do Projeto</h3>
+                            <div class="progress-container">
+                                <div class="progress-label"><span>Escrita do Livro 1</span><span>45%</span></div>
+                                <div class="progress-bar-bg"><div class="progress-bar-fill" style="width: 45%;"></div></div>
+                            </div>
+                            <div class="progress-container">
+                                <div class="progress-label"><span>Arte dos Personagens</span><span>20%</span></div>
+                                <div class="progress-bar-bg"><div class="progress-bar-fill" style="width: 20%;"></div></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-<div id="page-characters" class="page-section">
-    <div class="page-header">
-        <button class="btn-back" onclick="switchPage('lore')"><i data-lucide="arrow-left" size="24"></i></button>
-        <h2 class="page-title">Personagens</h2>
+        </main>
     </div>
-    <div class="character-grid">
-        <div class="char-card" onclick="openModal('modal-mare')">
-            <div class="char-img"></div>
-            <h3>A Maré</h3>
+
+    <footer class="fixed-footer">
+        <p>&copy; 2024 Universo Nexora. Todos os direitos reservados.</p>
+        <p>Personagens, mundos e textos são propriedade intelectual exclusiva de <strong>Victor Ryan Severino de Morais</strong>.</p>
+    </footer>
+
+    <!-- MODAIS -->
+    <div class="modal-overlay" id="modal-mare">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal('modal-mare')"><i data-lucide="x"></i></button>
+            <div class="modal-hero"></div>
+            <div class="modal-body">
+                <h2>A Maré</h2>
+                <p style="color: var(--gold-accent); margin-bottom: 15px;">Personificação da Água nos Infinitos Universos</p>
+                <p>Ela não é apenas a guardiã, ela é a própria essência da água em todas as realidades. Seu poder flui entre a criação e a destruição, moldando mundos com uma simples onda.</p>
+                <button class="btn-fav" onclick="toggleFavorite('A Maré')"><i data-lucide="star" size="16"></i> Favoritar</button>
+            </div>
         </div>
     </div>
-</div>
+
+    <div class="modal-overlay" id="modal-construcao">
+        <div class="modal-content modal-simple">
+            <button class="modal-close" onclick="closeModal('modal-construcao')"><i data-lucide="x"></i></button>
+            <i data-lucide="hammer" size="48"></i>
+            <h2>Portal em Construção</h2>
+            <p>O criador ainda está tecendo esta parte do universo. Volte em breve!</p>
+        </div>
+    </div>
+
+    <!-- SCRIPT -->
+    <script>
+        lucide.createIcons();
+
+        function toggleMenu() { document.getElementById('mobileMenu').classList.toggle('active'); }
+        
+        function switchPage(pageId) {
+            document.querySelectorAll('.page-section').forEach(page => page.classList.remove('active'));
+            document.getElementById('page-' + pageId).classList.add('active');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function openModal(modalId) { document.getElementById(modalId).classList.add('active'); }
+        function closeModal(modalId) { document.getElementById(modalId).classList.remove('active'); }
+        
+        document.querySelectorAll('.modal-overlay').forEach(overlay => {
+            overlay.addEventListener('click', function(e) { if (e.target === this) closeModal(this.id); });
+        });
+
+        function toggleReadMore() {
+            const content = document.getElementById('inspirationContent');
+            const btn = document.getElementById('btnReadMore');
+            content.classList.toggle('expanded');
+            if (content.classList.contains('expanded')) {
+                btn.innerHTML = 'Ler menos <i data-lucide="chevron-up" size="16"></i>';
+            } else {
+                btn.innerHTML = 'Ler mais <i data-lucide="chevron-down" size="16"></i>';
+            }
+            lucide.createIcons();
+        }
+
+        function toggleFavorite(itemName) {
+            let favs = JSON.parse(localStorage.getItem('nexoraFavs')) || [];
+            const btn = event.target.closest('.btn-fav');
+            if (favs.includes(itemName)) {
+                favs = favs.filter(f => f !== itemName);
+                btn.classList.remove('active');
+            } else {
+                favs.push(itemName);
+                btn.classList.add('active');
+            }
+            localStorage.setItem('nexoraFavs', JSON.stringify(favs));
+            updateFavoritesList();
+        }
+
+        function updateFavoritesList() {
+            const list = document.getElementById('favoritos-list');
+            if (!list) return;
+            let favs = JSON.parse(localStorage.getItem('nexoraFavs')) || [];
+            if (favs.length === 0) {
+                list.innerHTML = '<p style="font-size: 0.8rem; font-style: italic; color: #666;">Nenhum favorito ainda.</p>';
+            } else {
+                list.innerHTML = favs.map(fav => `<div style="background: rgba(212, 175, 55, 0.2); border: 1px solid var(--gold-accent); padding: 10px; border-radius: 8px; font-size: 0.9rem; color: var(--gold-accent); font-weight: bold;"><i data-lucide="star" size="14" style="display:inline; margin-right: 5px;"></i> ${fav}</div>`).join('');
+            }
+            lucide.createIcons();
+        }
+
+        document.addEventListener('DOMContentLoaded', updateFavoritesList);
+    </script>
+</body>
+</html>
