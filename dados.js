@@ -35,7 +35,15 @@ const DADOS = {
             nome: "Maré",
             descricao: "A guardiã das profundezas. Carrega em si o peso de mil oceanos.",
             imagem: "mare.jpg"
+        },
+
+         {
+            id: "ananke",
+            nome: "Ananke",
+            descricao: "A personificação da realidade, suas palavras sãeis, a existência de molda a sua imagem.")",
+            imagem: "ananke.jpg"
         }
+    ]
         // ,{
         //     id: "novo-personagem",
         //     nome: "Nome do Personagem",
