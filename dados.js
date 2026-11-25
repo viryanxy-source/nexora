@@ -44,11 +44,4 @@ const DADOS = {
             imagem: "ananke.jpg"
         }
     ]
-        // ,{
-        //     id: "novo-personagem",
-        //     nome: "Nome do Personagem",
-        //     descricao: "Descrição do personagem",
-        //     imagem: "foto.jpg"
-        // }
-    ]
 };
