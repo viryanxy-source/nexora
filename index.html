@@ -257,9 +257,33 @@
     .hero-buttons { flex-direction: column; }
     .breadcrumbs { font-size: 0.8rem; }
 }
+        /* --- TELA DE ABERTURA --- */
+#splash-screen {
+    position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+    background: linear-gradient(135deg, rgba(10, 10, 12, 0.98) 0%, rgba(20, 15, 25, 0.95) 100%), 
+                url('https://images.unsplash.com/photo-1462331940025-496dfbfc7564?q=80&w=2000&auto=format&fit=crop') center/cover no-repeat;
+    z-index: 9999; display: flex; flex-direction: column; justify-content: center; align-items: center;
+    transition: opacity 1.2s ease, visibility 1.2s ease;
+}
+#splash-screen.hidden { opacity: 0; visibility: hidden; }
+.splash-logo { color: var(--gold-accent); width: 120px; height: 120px; border-radius: 50%; border: 3px solid var(--gold-accent); display: flex; justify-content: center; align-items: center; box-shadow: 0 0 40px var(--gold-glow); margin-bottom: 30px; animation: pulseLogo 3s infinite alternate; }
+.splash-title { font-family: 'Cinzel', serif; font-size: 2.5rem; color: var(--text-primary); margin-bottom: 10px; text-align: center; letter-spacing: 2px; }
+.splash-subtitle { color: var(--text-secondary); margin-bottom: 50px; font-style: italic; text-align: center; }
+.btn-start { background: transparent; color: var(--gold-accent); border: 2px solid var(--gold-accent); padding: 15px 40px; font-size: 1.2rem; font-family: 'Cinzel', serif; font-weight: bold; border-radius: 30px; cursor: pointer; transition: all 0.4s ease; box-shadow: 0 0 15px rgba(212, 175, 55, 0.2); }
+.btn-start:hover { background: var(--gold-accent); color: #000; box-shadow: 0 0 30px var(--gold-glow); transform: scale(1.05); }
+@keyframes pulseLogo { 0% { box-shadow: 0 0 20px var(--gold-glow); } 100% { box-shadow: 0 0 60px var(--gold-accent); } }
 </style>
 </head>
 <body>
+    <!-- TELA DE ABERTURA -->
+<div id="splash-screen">
+    <div class="splash-logo">
+        <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/><path d="M12 6c-3.31 0-6 2.69-6 6s2.69 6 6 6 6-2.69 6-6"/><path d="M12 8c-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4"/></svg>
+    </div>
+    <h1 class="splash-title">NEXORA</h1>
+    <p class="splash-subtitle">"Onde os heróis não são perfeitos; eles sobrevivem."</p>
+    <button class="btn-start" onclick="entrarNoUniverso()">Iniciar Jornada</button>
+</div>
 <div class="mobile-menu" id="mobileMenu">
     <button class="close-btn" onclick="toggleMenu()" aria-label="Fechar menu"><i data-lucide="x" size="28"></i></button>
     <a onclick="toggleMenu(); switchPage('home')"><i data-lucide="home" size="18"></i> Início</a>
@@ -774,6 +798,11 @@
             carregarDados();
             if (window.lucide) lucide.createIcons();
         });
+        // Lógica da Tela de Abertura
+function entrarNoUniverso() {
+    const splash = document.getElementById('splash-screen');
+    splash.classList.add('hidden');
+}
     </script>
 </body>
 </html>
