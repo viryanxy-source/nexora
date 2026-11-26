@@ -1,7 +1,7 @@
 const DADOS = {
 
     estatisticas: {
-        mundos: 3,
+        mundos: 0,
         personagens: 2,
         livros: 0,
         progresso: 15
@@ -23,14 +23,42 @@ const DADOS = {
         {
             id: "mare",
             nome: "Maré",
-            descricao: "A guardiã das profundezas. Carrega em si o peso de mil oceanos.",
+            descricao: "A entidade primordial, personificação da água entre mundos e universos.",
             imagem: "mare.jpg"
         },
         {
             id: "ananke",
             nome: "Ananke",
-            descricao: "A personificação da realidade.",
+            descricao: "A personificação da realidade, tudo se cria e se molda a sua vontade, suas palavras sao leis.",
             imagem: "ananke.jpg"
+        },
+        {
+            id:"",
+            nome: "".
+            descrição: "",
+            imagem:""
+        },
+        {
+        
+            id:"",
+            nome: "".
+            descrição: "",
+            imagem:""
+        },
+        {
+            id:"",
+            nome: "".
+            descrição: "",
+            imagem:""
+        },
+        {
+            id:"",
+            nome: "".
+            descrição: "",
+            imagem:""
+
         }
+
+        
     ]
 };
