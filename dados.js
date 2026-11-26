@@ -34,27 +34,27 @@ const DADOS = {
         },
         {
             id:"",
-            nome: "".
-            descrição: "",
+            nome: "",
+            descricao: "",
             imagem:""
         },
         {
         
             id:"",
-            nome: "".
-            descrição: "",
+            nome: "",
+            descricao: "",
+            imagem:""
+        },
+        {
+            id:"",
+            nome: "",
+            descricao: "",
             imagem:""
         },
         {
             id:"",
             nome: "".
-            descrição: "",
-            imagem:""
-        },
-        {
-            id:"",
-            nome: "".
-            descrição: "",
+            descricao: "",
             imagem:""
 
         }
