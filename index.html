@@ -1416,44 +1416,6 @@ function switchTab(tabName) {
             document.body.style.overflow = '';
         }
         
-        // Sistema de Favoritos com localStorage
-function toggleFav(btn) {
-    btn.classList.toggle('active');
-    
-    // Pega os dados do personagem do modal aberto
-    const nome = document.getElementById('modal-char-nome').textContent;
-    const desc = document.getElementById('modal-char-desc').textContent;
-    const img = document.getElementById('modal-char-img').style.backgroundImage;
-    
-    // Extrai a URL da imagem
-    const imgMatch = img.match(/url\(['"]?(.*?)['"]?\)/);
-    const imgSrc = imgMatch ? imgMatch[1] : '';
-    
-    // Cria um ID único baseado no nome
-    const id = nome.toLowerCase().replace(/\s+/g, '-');
-    
-    // Pega os favoritos salvos
-    let favoritos = JSON.parse(localStorage.getItem('nexora_favoritos') || '[]');
-    const index = favoritos.findIndex(f => f.id === id);
-    
-    if (index > -1) {
-        // Remove se já existir
-        favoritos.splice(index, 1);
-        btn.innerHTML = '<i data-lucide="heart" size="16"></i> Favoritar';
-    } else {
-        // Adiciona se não existir
-        favoritos.push({ id, nome, descricao: desc, imagem: imgSrc });
-        btn.innerHTML = '<i data-lucide="heart" size="16" style="fill: #000;"></i> Favoritado';
-    }
-    
-    // Salva no localStorage
-    localStorage.setItem('nexora_favoritos', JSON.stringify(favoritos));
-    
-    // Atualiza a aba de favoritos se estiver visível
-    renderizarFavoritos();
-    
-    if (window.lucide) lucide.createIcons();
-}
 
 function renderizarFavoritos() {
     const container = document.getElementById('favoritos-container');
