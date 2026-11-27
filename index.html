@@ -795,14 +795,99 @@
     </div>
 </div>
 
-<!-- BANNER DE COOKIES -->              ← COLOCA AQUI
+<!-- BANNER DE COOKIES -->
 <div class="cookie-banner" id="cookieBanner">
-    ...
+    <div class="cookie-content">
+        <div class="cookie-text">
+            <h3><i data-lucide="cookie" size="20"></i> Sua Privacidade Importa</h3>
+            <p>
+                O Nexora utiliza tecnologias de armazenamento para melhorar sua experiência, 
+                como salvar seus personagens favoritos e preferências de navegação. 
+                Você pode gerenciar suas preferências ou ler nossa 
+                <a onclick="switchPage('about')">Política de Privacidade</a>.
+            </p>
+        </div>
+        <div class="cookie-buttons">
+            <button class="cookie-btn cookie-btn-manage" onclick="openCookiePrefs()">
+                <i data-lucide="settings" size="14"></i> Gerenciar
+            </button>
+            <button class="cookie-btn cookie-btn-reject" onclick="rejectCookies()">
+                Negar todos
+            </button>
+            <button class="cookie-btn cookie-btn-accept" onclick="acceptCookies()">
+                Aceitar todos
+            </button>
+        </div>
+    </div>
 </div>
 
 <!-- MODAL DE PREFERÊNCIAS DE COOKIES -->
 <div class="cookie-prefs-overlay" id="cookiePrefsOverlay">
-    ...
+    <div class="cookie-prefs-modal">
+        <div class="cookie-prefs-header">
+            <h2>Preferências de Cookies</h2>
+            <button class="cookie-prefs-close" onclick="closeCookiePrefs()">
+                <i data-lucide="x" size="24"></i>
+            </button>
+        </div>
+        <div class="cookie-prefs-body">
+            <p style="color: var(--text-secondary); margin-bottom: 20px; font-size: 0.9rem;">
+                Escolha quais categorias de cookies você deseja permitir. Os cookies essenciais não podem ser desativados.
+            </p>
+
+            <div class="cookie-category">
+                <div class="cookie-category-header">
+                    <h4><i data-lucide="shield" size="16" style="color: var(--gold-accent)"></i> Essenciais</h4>
+                    <label class="toggle-switch">
+                        <input type="checkbox" checked disabled>
+                        <span class="toggle-slider"></span>
+                    </label>
+                </div>
+                <p>Necessários para o funcionamento básico do site, como salvar seus favoritos e preferências de navegação.</p>
+            </div>
+
+            <div class="cookie-category">
+                <div class="cookie-category-header">
+                    <h4><i data-lucide="sliders" size="16" style="color: var(--gold-accent)"></i> Funcionais</h4>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="cookie-functional" checked>
+                        <span class="toggle-slider"></span>
+                    </label>
+                </div>
+                <p>Permitem personalizar sua experiência, como lembrar suas escolhas de tema e idioma.</p>
+            </div>
+
+            <div class="cookie-category">
+                <div class="cookie-category-header">
+                    <h4><i data-lucide="bar-chart-2" size="16" style="color: var(--gold-accent)"></i> Analíticos</h4>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="cookie-analytics">
+                        <span class="toggle-slider"></span>
+                    </label>
+                </div>
+                <p>Ajudam a entender como você usa o site, para que possamos melhorar a experiência (atualmente desativado).</p>
+            </div>
+
+            <div class="cookie-category">
+                <div class="cookie-category-header">
+                    <h4><i data-lucide="megaphone" size="16" style="color: var(--gold-accent)"></i> Marketing</h4>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="cookie-marketing">
+                        <span class="toggle-slider"></span>
+                    </label>
+                </div>
+                <p>Usados para exibir conteúdo relevante e ofertas personalizadas (atualmente desativado).</p>
+            </div>
+        </div>
+        <div class="cookie-prefs-footer">
+            <button class="cookie-btn cookie-btn-reject" onclick="rejectCookies(); closeCookiePrefs();">
+                Negar todos
+            </button>
+            <button class="cookie-btn cookie-btn-accept" onclick="saveCookiePrefs()">
+                Salvar preferências
+            </button>
+        </div>
+    </div>
 </div>
 
     <footer class="fixed-footer">
