@@ -671,6 +671,26 @@ input:disabled + .toggle-slider {
     .cookie-prefs-footer { flex-direction: column; }
     .cookie-prefs-footer .cookie-btn { width: 100%; }
     }
+        /* Correção para os cards de números no celular */
+@media (max-width: 768px) {
+    .stats-grid {
+        grid-template-columns: 1fr 1fr; /* Mantém 2 colunas */
+        gap: 10px;
+    }
+    .stat-item {
+        padding: 10px;
+        min-height: 70px; /* Deixa o card mais retangular e menos quadrado */
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+    .stat-item h4 {
+        font-size: 1.5rem;
+    }
+    .stat-item span {
+        font-size: 0.7rem;
+    }
+}
 </style>
 </head>
 <body>
