@@ -1140,6 +1140,75 @@ function removerFavorito(id) {
             }
         });
         
+    // ==========================================
+// SISTEMA DE COOKIES (Profissional)
+// ==========================================
+
+function initCookieBanner() {
+    const cookieChoice = localStorage.getItem('nexora_cookie_consent');
+    if (!cookieChoice) {
+        setTimeout(() => {
+            document.getElementById('cookieBanner').classList.add('active');
+            if (window.lucide) lucide.createIcons();
+        }, 1000);
+    }
+}
+
+function acceptCookies() {
+    const prefs = {
+        essential: true,
+        functional: true,
+        analytics: true,
+        marketing: true,
+        timestamp: new Date().toISOString()
+    };
+    localStorage.setItem('nexora_cookie_consent', JSON.stringify(prefs));
+    document.getElementById('cookieBanner').classList.remove('active');
+    console.log('✅ Todos os cookies aceitos');
+}
+
+function rejectCookies() {
+    const prefs = {
+        essential: true,
+        functional: false,
+        analytics: false,
+        marketing: false,
+        timestamp: new Date().toISOString()
+    };
+    localStorage.setItem('nexora_cookie_consent', JSON.stringify(prefs));
+    document.getElementById('cookieBanner').classList.remove('active');
+    console.log('❌ Cookies não essenciais negados');
+}
+
+function openCookiePrefs() {
+    const saved = localStorage.getItem('nexora_cookie_consent');
+    if (saved) {
+        const prefs = JSON.parse(saved);
+        document.getElementById('cookie-functional').checked = prefs.functional || false;
+        document.getElementById('cookie-analytics').checked = prefs.analytics || false;
+        document.getElementById('cookie-marketing').checked = prefs.marketing || false;
+    }
+    document.getElementById('cookiePrefsOverlay').classList.add('active');
+    if (window.lucide) lucide.createIcons();
+}
+
+function closeCookiePrefs() {
+    document.getElementById('cookiePrefsOverlay').classList.remove('active');
+}
+
+function saveCookiePrefs() {
+    const prefs = {
+        essential: true,
+        functional: document.getElementById('cookie-functional').checked,
+        analytics: document.getElementById('cookie-analytics').checked,
+        marketing: document.getElementById('cookie-marketing').checked,
+        timestamp: new Date().toISOString()
+    };
+    localStorage.setItem('nexora_cookie_consent', JSON.stringify(prefs));
+    document.getElementById('cookieBanner').classList.remove('active');
+    closeCookiePrefs();
+    console.log('⚙️ Preferências salvas:', prefs);
+}
         // Fechar modal com ESC
         document.addEventListener('keydown', function(event) {
             if (event.key === 'Escape') {
@@ -1151,10 +1220,11 @@ function removerFavorito(id) {
         });
 
         // Inicializar site
-        window.addEventListener('DOMContentLoaded', () => {
-            carregarDados();
-            if (window.lucide) lucide.createIcons();
-        });
+window.addEventListener('DOMContentLoaded', () => {
+    carregarDados();
+    initCookieBanner();  ← ADICIONA ESSA LINHA
+    if (window.lucide) lucide.createIcons();
+});
         // Lógica da Tela de Abertura
 function entrarNoUniverso() {
     const splash = document.getElementById('splash-screen');
