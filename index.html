@@ -11,6 +11,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Cinzel:wght@600;800&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
     <style>
         :root {
             --bg-color: #0a0a0c;
@@ -694,6 +695,7 @@ input:disabled + .toggle-slider {
 </style>
 </head>
 <body>
+    <div id="particles-js" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -2; pointer-events: none;"></div>
     <!-- TELA DE ABERTURA -->
 <div id="splash-screen">
     <div class="splash-logo">
@@ -1590,6 +1592,26 @@ window.addEventListener('DOMContentLoaded', () => {
 function entrarNoUniverso() {
     const splash = document.getElementById('splash-screen');
     splash.classList.add('hidden');
+}
+        // --- CONFIGURAÇÃO DAS ESTRELAS DE FUNDO ---
+if (window.particlesJS) {
+    particlesJS("particles-js", {
+        "particles": {
+            "number": { "value": 50, "density": { "enable": true, "value_area": 800 } },
+            "color": { "value": "#d4af37" },
+            "shape": { "type": "circle" },
+            "opacity": { "value": 0.4, "random": true, "anim": { "enable": true, "speed": 0.5, "opacity_min": 0.1, "sync": false } },
+            "size": { "value": 2, "random": true, "anim": { "enable": true, "speed": 2, "size_min": 0.1, "sync": false } },
+            "line_linked": { "enable": false },
+            "move": { "enable": true, "speed": 0.6, "direction": "none", "random": true, "straight": false, "out_mode": "out", "bounce": false }
+        },
+        "interactivity": {
+            "detect_on": "canvas",
+            "events": { "onhover": { "enable": true, "mode": "bubble" }, "onclick": { "enable": false } },
+            "modes": { "bubble": { "distance": 200, "size": 3, "duration": 2, "opacity": 0.8, "size_min": 0.1 } }
+        },
+        "retina_detect": true
+    });
 }
     </script>
 </body>
