@@ -292,6 +292,129 @@
 .fav-info h4 { color: var(--text-primary); font-family: 'Cinzel', serif; margin-bottom: 5px; }
 .btn-remove-fav { background: transparent; border: 1px solid var(--surface-border); border-radius: 50%; width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; cursor: pointer; color: var(--text-secondary); transition: 0.3s; flex-shrink: 0; }
 .btn-remove-fav:hover { background: rgba(255, 0, 0, 0.1); border-color: #ff4444; color: #ff4444; }
+        /* --- NOVO MODAL DE PERSONAGEM (Estilo Pôster) --- */
+#modal-char-dinamico .modal-content {
+    max-width: 100%;
+    max-height: 100vh;
+    border-radius: 0;
+    border: none;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    animation: modalInPoster 0.5s ease;
+}
+
+@keyframes modalInPoster {
+    from { opacity: 0; transform: scale(0.95); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+.modal-char-header {
+    height: 50vh;
+    position: relative;
+    background-size: cover;
+    background-position: center top;
+    flex-shrink: 0;
+}
+
+.modal-char-header::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; width: 100%; height: 150px;
+    background: linear-gradient(to top, #121216 0%, transparent 100%);
+}
+
+.modal-char-actions {
+    position: absolute;
+    top: 20px; right: 20px;
+    display: flex;
+    gap: 15px;
+    z-index: 10;
+}
+
+.action-btn {
+    background: rgba(0,0,0,0.6);
+    border: 1px solid var(--gold-accent);
+    color: var(--gold-accent);
+    width: 45px; height: 45px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer;
+    backdrop-filter: blur(5px);
+    transition: 0.3s;
+}
+
+.action-btn:hover, .action-btn.active {
+    background: var(--gold-accent);
+    color: #000;
+}
+
+.modal-char-body {
+    flex: 1;
+    background: #121216;
+    padding: 30px 20px;
+    overflow-y: auto;
+    position: relative;
+    border-radius: 30px 30px 0 0;
+    margin-top: -30px;
+    z-index: 5;
+}
+
+.modal-char-title {
+    font-family: 'Cinzel', serif;
+    font-size: 2.5rem;
+    color: var(--gold-accent);
+    margin-bottom: 10px;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.char-swipe-container {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    gap: 20px;
+    padding-bottom: 20px;
+    scrollbar-width: none;
+}
+.char-swipe-container::-webkit-scrollbar { display: none; }
+
+.char-slide {
+    min-width: 100%;
+    scroll-snap-align: center;
+    background: rgba(255,255,255,0.03);
+    padding: 20px;
+    border-radius: 15px;
+    border: 1px solid var(--surface-border);
+}
+
+.char-slide h4 {
+    color: var(--text-primary);
+    font-family: 'Cinzel', serif;
+    margin-bottom: 10px;
+    font-size: 1.2rem;
+}
+
+.char-slide p {
+    color: var(--text-secondary);
+    line-height: 1.6;
+    font-size: 0.95rem;
+}
+
+.swipe-indicators {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 15px;
+}
+.dot {
+    width: 8px; height: 8px;
+    background: var(--surface-border);
+    border-radius: 50%;
+    transition: 0.3s;
+}
+.dot.active { background: var(--gold-accent); width: 20px; border-radius: 4px; }
 </style>
 </head>
 <body>
@@ -625,18 +748,50 @@
         </div>
     </div>
 
-    <!-- Modal Dinâmico de Personagem -->
-    <div class="modal-overlay" id="modal-char-dinamico" onclick="closeModal(event, 'modal-char-dinamico')">
-        <div class="modal-content">
-            <button class="modal-close" onclick="closeModalBtn('modal-char-dinamico')" aria-label="Fechar"><i data-lucide="x"></i></button>
-            <div class="modal-hero" id="modal-char-img"></div>
-            <div class="modal-body">
-                <h2 id="modal-char-nome"></h2>
-                <p style="color: var(--text-secondary); margin-top: 15px;" id="modal-char-desc"></p>
-                <button class="btn-fav" onclick="toggleFav(this)" aria-label="Adicionar aos favoritos"><i data-lucide="heart" size="16"></i> Favoritar</button>
+    <!-- Modal Dinâmico de Personagem (NOVO) -->
+<div class="modal-overlay" id="modal-char-dinamico" onclick="closeModal(event, 'modal-char-dinamico')">
+    <div class="modal-content">
+        
+        <!-- Topo: Imagem e Botões -->
+        <div class="modal-char-header" id="modal-char-img">
+            <div class="modal-char-actions">
+                <button class="modal-close action-btn" onclick="closeModalBtn('modal-char-dinamico')" aria-label="Fechar">
+                    <i data-lucide="x" size="20"></i>
+                </button>
+                <button class="action-btn" id="modal-char-fav-btn" onclick="toggleFavModal()" aria-label="Favoritar">
+                    <i data-lucide="heart" size="20"></i>
+                </button>
             </div>
         </div>
+
+        <!-- Baixo: Texto e Swipe -->
+        <div class="modal-char-body">
+            <h2 class="modal-char-title" id="modal-char-nome">Nome</h2>
+            
+            <!-- Área que arrasta -->
+            <div class="char-swipe-container" id="char-swipe-area">
+                <!-- Slide 1: Visão Geral -->
+                <div class="char-slide">
+                    <h4><i data-lucide="user" size="16" style="color:var(--gold-accent)"></i> Quem é?</h4>
+                    <p id="modal-char-desc">Descrição aqui...</p>
+                </div>
+                
+                <!-- Slide 2: Poderes (Exemplo estático por enquanto) -->
+                <div class="char-slide">
+                    <h4><i data-lucide="zap" size="16" style="color:var(--gold-accent)"></i> Poderes & Habilidades</h4>
+                    <p>Os detalhes dos poderes de <span id="modal-char-nome-poderes">este ser</span> estão sendo revelados. Suas habilidades moldam a realidade ao seu redor.</p>
+                </div>
+            </div>
+
+            <!-- Bolinhas indicadoras -->
+            <div class="swipe-indicators">
+                <div class="dot active"></div>
+                <div class="dot"></div>
+            </div>
+        </div>
+
     </div>
+</div>
 
     <footer class="fixed-footer">
         <p>© 2026 <strong>Nexora</strong>. Todos os direitos reservados.</p>
@@ -737,13 +892,71 @@
             if (window.lucide) lucide.createIcons();
         }
 
-        // Função específica para abrir modal de personagem dinâmico
-        function abrirModalPersonagem(char) {
-            document.getElementById('modal-char-nome').textContent = char.nome;
-            document.getElementById('modal-char-desc').textContent = char.descricao;
-            document.getElementById('modal-char-img').style.backgroundImage = `url('${char.imagem}')`;
-            openModal('modal-char-dinamico');
-        }
+        // Função para abrir o novo modal de personagem (Estilo Pôster)
+function abrirModalPersonagem(char) {
+    // 1. Preenche a Imagem de fundo
+    document.getElementById('modal-char-img').style.backgroundImage = `url('${char.imagem}')`;
+    
+    // 2. Preenche os Textos
+    document.getElementById('modal-char-nome').textContent = char.nome;
+    document.getElementById('modal-char-nome-poderes').textContent = char.nome;
+    document.getElementById('modal-char-desc').textContent = char.descricao;
+    
+    // 3. Verifica se já está nos favoritos para pintar o coração
+    const favBtn = document.getElementById('modal-char-fav-btn');
+    const id = char.nome.toLowerCase().replace(/\s+/g, '-');
+    let favoritos = JSON.parse(localStorage.getItem('nexora_favoritos') || '[]');
+    const isFav = favoritos.some(f => f.id === id);
+    
+    if (isFav) {
+        favBtn.classList.add('active');
+        favBtn.innerHTML = '<i data-lucide="heart" size="20" style="fill: #000;"></i>';
+    } else {
+        favBtn.classList.remove('active');
+        favBtn.innerHTML = '<i data-lucide="heart" size="20"></i>';
+    }
+    
+    // 4. Guarda os dados no botão (para a função de favoritar saber quem é)
+    favBtn.dataset.currentId = id;
+    favBtn.dataset.currentNome = char.nome;
+    favBtn.dataset.currentDesc = char.descricao;
+    favBtn.dataset.currentImg = char.imagem;
+
+    // 5. Abre o modal
+    openModal('modal-char-dinamico');
+    
+    // 6. Atualiza os ícones
+    if (window.lucide) lucide.createIcons();
+}
+
+// Função para favoritar direto do novo modal
+function toggleFavModal() {
+    const btn = document.getElementById('modal-char-fav-btn');
+    const id = btn.dataset.currentId;
+    const nome = btn.dataset.currentNome;
+    const desc = btn.dataset.currentDesc;
+    const img = btn.dataset.currentImg;
+
+    let favoritos = JSON.parse(localStorage.getItem('nexora_favoritos') || '[]');
+    const index = favoritos.findIndex(f => f.id === id);
+
+    if (index > -1) {
+        // Se já existe, remove
+        favoritos.splice(index, 1);
+        btn.classList.remove('active');
+        btn.innerHTML = '<i data-lucide="heart" size="20"></i>';
+    } else {
+        // Se não existe, adiciona
+        favoritos.push({ id, nome, descricao: desc, imagem: img });
+        btn.classList.add('active');
+        btn.innerHTML = '<i data-lucide="heart" size="20" style="fill: #000;"></i>';
+    }
+
+    localStorage.setItem('nexora_favoritos', JSON.stringify(favoritos));
+    renderizarFavoritos(); // Atualiza a aba da biblioteca
+    
+    if (window.lucide) lucide.createIcons();
+}
 
         // ==========================================
         // FUNÇÕES DE NAVEGAÇÃO E UI
